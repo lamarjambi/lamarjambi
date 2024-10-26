@@ -1,3 +1,0 @@
-# Midterm Project!!
-
-Used material:
