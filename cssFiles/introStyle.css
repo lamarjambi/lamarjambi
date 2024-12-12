@@ -94,7 +94,20 @@ strong {
 }
 
 .card:hover {
-    animation: float 1.5s ease-in-out infinite; /* animation: is only available when we use @keyframe */
+    animation: float 1.5s ease-in-out infinite; 
 }
 
-
+@media (max-width: 768px) {
+    strong {
+        margin-bottom: 8%; 
+    }
+    
+    body {
+        padding: 30px; 
+    }
+    
+    .card {
+        width: 220px; 
+        height: 330px;
+    }
+}
