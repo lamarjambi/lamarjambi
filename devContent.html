@@ -5,7 +5,7 @@
     <head> <!--content about the page-->
         <meta charset="utf-8"> <!--alpahbet and fonts type shit-->
         <meta name="viewport" content="width=device-width, initial-scale=1"> <!--responsive behaivor-->
-        <title>Jambo Developer Habitat</title>
+        <title>J@mbo Developer Habitat</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -35,7 +35,14 @@
           
             <ul class="nav-items">
 
-              <li><a href="files/Lamar Jambi Resume (Updated).pdf" target="_blank">Resume</a></li>
+              <li>
+                <a href="files/Lamar Jambi Resume (Updated).pdf" target="_blank">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 448 512">
+                    <path d="M364.2 83.8c-24.4-24.4-64-24.4-88.4 0l-184 184c-42.1 42.1-42.1 110.3 0 152.4s110.3 42.1 152.4 0l152-152c10.9-10.9 28.7-10.9 39.6 0s10.9 28.7 0 39.6l-152 152c-64 64-167.6 64-231.6 0s-64-167.6 0-231.6l184-184c46.3-46.3 121.3-46.3 167.6 0s46.3 121.3 0 167.6l-176 176c-28.6 28.6-75 28.6-103.6 0s-28.6-75 0-103.6l144-144c10.9-10.9 28.7-10.9 39.6 0s10.9 28.7 0 39.6l-144 144c-6.7 6.7-6.7 17.7 0 24.4s17.7 6.7 24.4 0l176-176c24.4-24.4 24.4-64 0-88.4z"/>
+                  </svg>
+                </a>
+              </li>
+
               <li>
                 <a href="https://github.com/lamarjambi" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="GitHub">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -54,62 +61,75 @@
                 </a>
               </li>
 
-              <li><a href="index.html">Game</a></li>
-
+              <li>
+                <a href="index.html">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 640 512">
+                    <path d="M192 64C86 64 0 150 0 256S86 448 192 448l256 0c106 0 192-86 192-192s-86-192-192-192L192 64zM496 168a40 40 0 1 1 0 80 40 40 0 1 1 0-80zM392 304a40 40 0 1 1 80 0 40 40 0 1 1 -80 0zM168 200c0-13.3 10.7-24 24-24s24 10.7 24 24l0 32 32 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-32 0 0 32c0 13.3-10.7 24-24 24s-24-10.7-24-24l0-32-32 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l32 0 0-32z"/>
+                  </svg>
+                </a>
+              </li>
+              
             </ul>
           </div>
           <!-- END OF NAVBAR -->
 
+          <!-- NAVBAR ANIMATIONS -->
           <script>
             const toggleClick = document.querySelector('.toggle-box');
             const verticalContainer = document.querySelector('.vertical-container');
             
             toggleClick.addEventListener('click', (e) => {
-              e.preventDefault(); // Prevent the link from navigating
+              e.preventDefault(); 
               toggleClick.classList.toggle('active');
               verticalContainer.classList.toggle('active');
             });
           
-            // Draggable functionality
-            let isDragging = false;
-            let startX, startY, offsetX = 0, offsetY = 0;
-          
-            // Mouse down event to start dragging
-            verticalContainer.addEventListener('mousedown', (e) => {
-              isDragging = true;
-              startX = e.clientX - offsetX;
-              startY = e.clientY - offsetY;
-              verticalContainer.style.transition = "none"; // Disable transition while dragging
-            });
-          
-            // Mouse move event to update the container's position
-            document.addEventListener('mousemove', (e) => {
-              if (isDragging) {
-                offsetX = e.clientX - startX;
-                offsetY = e.clientY - startY;
-          
-                // Update the container's position
-                verticalContainer.style.left = `${offsetX}px`;
-                verticalContainer.style.top = `${offsetY}px`;
+            // HW - implementing JS DOM; dragging functionality (fixing)
+            const dragElem = document.getElementById('drag');
+
+            function startDragging(dragElem) {
+              let offsetX = 0, offsetY = 0;
+
+              // when the mouse is held, drag
+              dragElem.onmousedown = function(e) {
+                e.preventDefault(); 
+
+                // getBoundingClientRect() returns the location of an element
+                offsetX = e.clientX - dragElem.getBoundingClientRect().left; // left gives X position
+                offsetY = e.clientY - dragElem.getBoundingClientRect().top; // top gives Y position
+
+                document.onmousemove = onDrag;
+                document.onmouseup = stopDragging;
+              };
+
+              function onDrag(e) {
+                e.preventDefault();
+
+                // updating user (client) cursor location
+                dragElem.style.left = (e.clientX - offsetX) + 'px';
+                dragElem.style.top = (e.clientY - offsetY) + 'px';
               }
-            });
-          
-            // Mouse up event to stop dragging
-            document.addEventListener('mouseup', () => {
-              isDragging = false;
-              verticalContainer.style.transition = "0.4s ease"; // Restore transition
-            });
+
+              function stopDragging() {
+                // null = empty pointer, so basically when called it stops returning anything
+                document.onmousemove = null;
+                document.onmouseup = null;
+              }
+            }
+
+            startDragging(dragElem);
           </script>
-          
+          <!-- END OF NAVBAR ANIMATIONS -->
+
           <!-- hi people :3 -->
           <section class="about">
 
             <div class="about-text">
-              <h3 class="heading">Welcome aboard >:3</h3>
+              <h3 class="heading">W3lc0me aboard >:3</h3>
               <p class="lead-para">
-                This is Jambo (Lamar Jambi) :P. I'm an Integarted Design and Media, Computer Science, 
+                This is J@mbo (Lamar Jambi) :P. I'm an Integarted Design and Media, Computer Science, 
                 and Game Design student at New York University. Currently Based in Brooklyn, NY! Interested
-                in digital art, game development and, front-end coding with UI/UX.
+                in digital art, game development, and comnputer visison in entertainment :]
                 <!-- ligula velit mollis dui, et elementum enim orci vel erat. Nam luctus laoreet tellus quis tempus. 
                 Nam faucibus, augue placerat sagittis aliquam, felis turpis condimentum elit.
                 Aliquam ac suscipit ligula.  -->
@@ -117,43 +137,166 @@
             </div>
 
             <div>
-              <img src="img/Image-holder.webp" alt="Illustration of Lamar" class="introImg">
+              <img src="img/self.jpg" alt="Picture of happy Lamar" class="introImg">
             </div>
 
           </section>
           <!-- end of hi poeple :3 -->
 
-          <!-- empty div to create a gap -->
-          <div class="spacer"></div> 
+          <!-- EXPIERIENCE SECTION -->
+          <section class="experience-section">
+            <div class="tag">Experience</div>
+            <h2 class="desc">I've been involved with..</h2>
+            
+            <div class="experience-timeline">
 
+              <div class="experience-item">
+                <div class="company">AR/VR</div>
+                <div class="role-details">
+                  <h3>Research Intern @ <a href="https://engineering.nyu.edu/vip-team/defining-accessibility-within-xr-gy" target="_blank" class="company-link">Defining Access. Within XR</a></h3>
+                  <div class="duration">Dec. 2024 - Present</div>
+                  <ul class="achievements">
+                    <li>
+                      <div class="achievement-content">
+                        Conducting research on accessibility challenges in 
+                        <span class="tech-tag">AR/VR technologies</span>, using Oculus Quest 2 and Snap Spectacles
+                      </div>
+                    </li>
+                    <li>
+                      <div class="achievement-content">
+                        Collaborating in a multidisciplinary team to design, prototype, and evaluate inclusive 
+                        reality experiences
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="experience-item">
+                <div class="company">GIL</div>
+                <div class="role-details">
+                  <h3>Research Intern @ <a href="https://game.engineering.nyu.edu/" target="_blank" class="company-link">Game Innovation Lab</a></h3>
+                  <div class="duration">Nov. 2024 - Present</div>
+                  <ul class="achievements">
+                    <li>
+                      <div class="achievement-content">
+                        Optimized AI agent solvers for puzzle games by implementing 
+                        <span class="tech-tag">A* Search Algorithm</span> and analyzing outcomes
+                      </div>
+                    </li>
+                    <li>
+                      <div class="achievement-content">
+                        Reimplementing game engines <span class="tech-tag">e.g. PuzzleScript</span> in 
+                        different programming languages to analyze performance metrics
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              
+              <div class="experience-item">
+                <div class="company">Robotics</div>
+                <div class="role-details">
+                  <h3>Software Engineer @ <a href="https://www.instagram.com/nyurobotics?igsh=bG1kMXc2ZnppaWN6" target="_blank" class="company-link">NYU Robotics Club</a></h3>
+                  <div class="duration">Sep. 2024 - Present</div>
+                  <ul class="achievements">
+                    <li>
+                      <div class="achievement-content">
+                        Developing an interactive website using 
+                        <span class="tech-tag">React</span> enabling online meetings and remote robot control
+                      </div>
+                    </li>
+                    <li>
+                      <div class="achievement-content">
+                        Enhancing the brand identity <span class="tech-tag">(color scheme, logo)</span> using Adobe Illustrator
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="experience-item">
+                <div class="company">UI/UX</div>
+                <div class="role-details">
+                  <h3>Front-End Developer @ <a href="https://www.instagram.com/nyu_uxclub?igsh=bWl0NDk4cGFsM2xr" target="_blank" class="company-link">NYU UX Club</a></h3>
+                  <div class="duration">Sep. 2024 - Present</div>
+                  <ul class="achievements">
+                    <li>
+                      <div class="achievement-content">
+                        Researching and designing user-centered solutions by creating 5+ interactive prototypes using
+                        <span class="tech-tag">Figma</span> 
+                      </div>
+                    </li>
+                    <li>
+                      <div class="achievement-content">
+                        Collaborating on design iterations to improve usability and user experience in various digital projects
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+            </div>
+          </section>
+          <!-- END OF EXPERIECNE SECTION -->
+          
           <!-- THUMBS!!! -->
           <section class="project-section">
             <div class="tag">Projects</div>
-            <h2 class="desc">Different programming languages</h2>
-            <div class="container">
+            <h2 class="desc">I've been making...</h2>
+            
+            <div class="projects-container">
 
-              <div class="grid">
-                
-                <div class="grid-item medium"><img src="img/fantasy café .png"></div>
-                <div class="grid-item large"><img src="img/lil-dancy-dance.png"> </div>
-                <div class="grid-item medium"><img src="img/Banana.png"></div>
-                <div class="grid-item small"><img src="img/bloop character board - colored.png"></div>
-                <div class="grid-item small"><img src="img/bloop bone.png"></div>
-                <div class="grid-item tall"><img src="img/Banana inspired.png"></div>
-                <div class="grid-item wide"><img src="img/desert landscape.png"></div>
-                <div class="grid-item tall"><img src="img/X-Lakin with a gun.png"></div>
-                <div class="grid-item small"><img src="img/frat demon boy.png"></div>
-                <div class="grid-item medium"><img src="img/trippy hell.JPG"></div>
-                <div class="grid-item medium"><img src="img/girls girls girls.JPG"></div>
-                <div class="grid-item double-horizontal"><img src="img/albalad.png"></div>
-                
-              </div>
+              <a href="https://github.com/smearle/ScriptDoctor.git" target="_blank" rel="noopener noreferrer" class="project-link">
+                <div class="project-card">
+                  <div class="project-image">
+                    <img src="img/script-doctor.png" alt="Project Image" loading="lazy">
+                  </div>
+                  <div class="project-content">
+                    <div class="project-header">
+                      <h3>Script Doctor A* AI Solver Agent</h3>
+                      <span class="project-status">Completed</span>
+                    </div>
+                    <p class="project-description">
+                      Implementing an AI PuzzleScript solver using A* Search Algorithm<br>
+                      This project includes creating AI chatbox prompts
+                    </p>
+                    <div class="project-tags">
+                      <span class="tech-tag">JavaScript</span>
+                      <span class="tech-tag">GPT-4</span>
+                      <span class="tech-tag">Python</span>
+                      <span class="tech-tag">A*</span>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a href="https://dev.hsrn.nyu.edu/vip/corelink_general_app/data_center_robot" target="_blank" rel="noopener noreferrer" class="project-link">
+                <div class="project-card">
+                  <div class="project-image">
+                    <img src="img/hsrn.png" alt="Project Image" loading="lazy">
+                  </div>
+                  <div class="project-content">
+                    <div class="project-header">
+                      <h3>Online Meeting Platform</h3>
+                      <span class="project-status">In progress</span>
+                    </div>
+                    <p class="project-description">
+                      Enhancing the app interface for the NYU IT X HSRN Data Center Robot meeting platform<br>
+                      This project includes building in real-time chatboxes and remote controling functionality
+                    </p>
+                    <div class="project-tags">
+                      <span class="tech-tag">React</span>
+                      <span class="tech-tag">JavaScript</span>
+                      <span class="tech-tag">Figma</span>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
             </div>
           </section>
           <!-- END OF THUMBS!!! -->
-          
-          <!-- empty div to create a gap -->
-          <div class="spacer"></div> 
 
           <!-- SKILLSSS -->
           <section class="skills-section">

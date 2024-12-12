@@ -5,7 +5,7 @@
     <head> <!--content about the page-->
         <meta charset="utf-8"> <!--alpahbet and fonts type shit-->
         <meta name="viewport" content="width=device-width, initial-scale=1"> <!--responsive behaivor-->
-        <title>Jambo Artistic Habitat</title>
+        <title>J@mbo Artistic Habitat</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -13,6 +13,13 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Dokdo&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+        <!-- EmailJS thingies -->
+        <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+        <!-- GSAP -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/Draggable.min.js"></script>
+        <!-- favicon :P -->
         <link rel="icon" type="image/x-icon" href="img/TransJambo-Logo-16px.png">
     </head>
 
@@ -20,7 +27,7 @@
         <div class="hero">
             <img
               src="img/tehe.png"
-              alt="Placeholder image!"
+              alt="Placeholder image"
             />
           </div>
 
@@ -28,15 +35,22 @@
           <div class="spacer"></div> 
 
           <!-- NAVBARR -->
-          <div class="vertical-container">
+          <div class="vertical-container" id="drag">
             <a href="" class="toggle-box">
               <span class="icon"></span>
             </a>
           
             <ul class="nav-items">
 
-              <!-- absolute vs relative path -->
-              <li><a href="files/Lamar Jambi Resume (Updated).pdf" target="_blank">Resume</a></li>
+              <!-- ask about absolute vs relative path ): -->
+              <li>
+                <a href="files/Lamar Jambi Resume (Updated).pdf" target="_blank">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 448 512">
+                    <path d="M364.2 83.8c-24.4-24.4-64-24.4-88.4 0l-184 184c-42.1 42.1-42.1 110.3 0 152.4s110.3 42.1 152.4 0l152-152c10.9-10.9 28.7-10.9 39.6 0s10.9 28.7 0 39.6l-152 152c-64 64-167.6 64-231.6 0s-64-167.6 0-231.6l184-184c46.3-46.3 121.3-46.3 167.6 0s46.3 121.3 0 167.6l-176 176c-28.6 28.6-75 28.6-103.6 0s-28.6-75 0-103.6l144-144c10.9-10.9 28.7-10.9 39.6 0s10.9 28.7 0 39.6l-144 144c-6.7 6.7-6.7 17.7 0 24.4s17.7 6.7 24.4 0l176-176c24.4-24.4 24.4-64 0-88.4z"/>
+                  </svg>
+                </a>
+              </li>
+
               <li>
                 <a href="https://github.com/lamarjambi" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="GitHub">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -55,7 +69,13 @@
                 </a>
               </li>
 
-              <li><a href="index.html">Game</a></li>
+              <li>
+                <a href="index.html">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 640 512">
+                    <path d="M192 64C86 64 0 150 0 256S86 448 192 448l256 0c106 0 192-86 192-192s-86-192-192-192L192 64zM496 168a40 40 0 1 1 0 80 40 40 0 1 1 0-80zM392 304a40 40 0 1 1 80 0 40 40 0 1 1 -80 0zM168 200c0-13.3 10.7-24 24-24s24 10.7 24 24l0 32 32 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-32 0 0 32c0 13.3-10.7 24-24 24s-24-10.7-24-24l0-32-32 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l32 0 0-32z"/>
+                  </svg>
+                </a>
+              </li>
 
             </ul>
           </div>
@@ -63,51 +83,79 @@
           
           <!-- NAVBAR ANIMATIONSS -->
           <script>
+            // gsap.registerPlugin(Draggable);
+
+            // // Toggle functionality 
+            // const toggleClick = document.querySelector('.toggle-box');
+            // const verticalContainer = document.querySelector('.vertical-container');
+
+            // toggleClick.addEventListener('click', (e) => {
+            //   e.preventDefault(); 
+            //   toggleClick.classList.toggle('active');
+            //   verticalContainer.classList.toggle('active');
+            // });
+
+            // // GSAP draggable
+            // Draggable.create(".vertical-container", {
+            //   bounds: window,
+            //   inertia: true
+            // });
+
             const toggleClick = document.querySelector('.toggle-box');
             const verticalContainer = document.querySelector('.vertical-container');
             
             toggleClick.addEventListener('click', (e) => {
-              e.preventDefault(); 
+              e.preventDefault(); // Prevent the link from navigating
               toggleClick.classList.toggle('active');
               verticalContainer.classList.toggle('active');
             });
-
-
-            let isDragging = false;
-            let startX, startY, offsetX = 0, offsetY = 0;
-
-            verticalContainer.addEventListener('mousedown', (e) => {
-              isDragging = true;
-              startX = e.clientX - offsetX;
-              startY = e.clientY - offsetY;
-              verticalContainer.style.transition = "none"; 
-            });
           
-            document.addEventListener('mousemove', (e) => {
-              if (isDragging) {
-                offsetX = e.clientX - startX;
-                offsetY = e.clientY - startY;
+            // HW - implementing JS DOM; dragging functionality (fixing)
+            const dragElem = document.getElementById('drag');
 
-                verticalContainer.style.left = `${offsetX}px`;
-                verticalContainer.style.top = `${offsetY}px`;
+            function startDragging(dragElem) {
+              let offsetX = 0, offsetY = 0;
+
+              // when the mouse is held, drag
+              dragElem.onmousedown = function(e) {
+                e.preventDefault(); 
+
+                // getBoundingClientRect() returns the location of an element
+                offsetX = e.clientX - dragElem.getBoundingClientRect().left; // left gives X position
+                offsetY = e.clientY - dragElem.getBoundingClientRect().top; // top gives Y position
+
+                document.onmousemove = onDrag;
+                document.onmouseup = stopDragging;
+              };
+
+              function onDrag(e) {
+                e.preventDefault();
+
+                // updating user (client) cursor location
+                dragElem.style.left = (e.clientX - offsetX) + 'px';
+                dragElem.style.top = (e.clientY - offsetY) + 'px';
               }
-            });
 
-            document.addEventListener('mouseup', () => {
-              isDragging = false;
-              verticalContainer.style.transition = "0.4s ease"; 
-            });
+              function stopDragging() {
+                // null = empty pointer, so basically when called it stops returning anything
+                document.onmousemove = null;
+                document.onmouseup = null;
+              }
+            }
+
+            startDragging(dragElem);
           </script>
           <!-- END OF NAVBAR ANIMATION -->
+           
           <!-- hi people :3 -->
           <section class="about">
 
             <div class="about-text">
-              <h3 class="heading">Welcome aboard >:3</h3>
+              <h3 class="heading">W3lc0me aboard >:3</h3>
               <p class="lead-para">
-                This is Jambo (Lamar Jambi) :P. I'm an Integarted Design and Media, Computer Science, 
+                This is J@mbo (Lamar Jambi) :P. I'm an Integarted Design and Media, Computer Science, 
                 and Game Design student at New York University. Currently Based in Brooklyn, NY! Interested
-                in digital art, game development and, front-end coding with UI/UX.
+                in digital art, game development, and comnputer visison in entertainment :]
                 <!-- ligula velit mollis dui, et elementum enim orci vel erat. Nam luctus laoreet tellus quis tempus. 
                 Nam faucibus, augue placerat sagittis aliquam, felis turpis condimentum elit.
                 Aliquam ac suscipit ligula.  -->
@@ -115,14 +163,14 @@
             </div>
 
             <div>
-              <img src="img/Image-holder.webp" alt="Illustration of Lamar" class="introImg">
+              <img src="img/self.jpg" alt="Image of Lamar" class="introImg">
             </div>
 
           </section>
           <!-- end of hi poeple :3 -->
 
-          <!-- empty div to create a gap -->
-          <div class="spacer"></div> 
+          <!-- empty div to create a gap
+          <div class="spacer"></div>  -->
 
           <!-- THUMBS!!! -->
           <section class="project-section">
@@ -132,36 +180,362 @@
 
               <div class="grid">
                 
-                <div class="grid-item medium"><img src="img/fantasy café .png"></div>
-                <div class="grid-item large"><img src="img/lil-dancy-dance.png"> </div>
-                <div class="grid-item medium"><img src="img/Banana.png"></div>
-                <div class="grid-item small"><img src="img/bloop character board - colored.png"></div>
-                <div class="grid-item small"><img src="img/bloop bone.png"></div>
-                <div class="grid-item tall"><img src="img/Banana inspired.png"></div>
-                <div class="grid-item wide"><img src="img/desert landscape.png"></div>
-                <div class="grid-item tall"><img src="img/X-Lakin with a gun.png"></div>
-                <div class="grid-item small"><img src="img/frat demon boy.png"></div>
-                <div class="grid-item medium"><img src="img/trippy hell.JPG"></div>
-                <div class="grid-item medium"><img src="img/girls girls girls.JPG"></div>
-                <div class="grid-item double-horizontal"><img src="img/albalad.png"></div>
+                <div class="grid-item medium">
+                  <div class="card-front">
+                    <img src="img/fantasy café .png" alt="Fantasy Café">
+                    <span class="overlay-text">Fantasy Café</span>
+                  </div>
+                  <div class="card-back">
+                    <h3>Fantasy Café</h3>
+                    <p>A cozy café illustration created in Adobe Photoshop</p>
+                    <div class="project-links">
+                      <a href="https://drive.google.com/file/d/11haBSugqNrNQKPcpPtSRiE6MnPDvp-Se/view?usp=drive_link" class="view-link">View</a>
+                    </div>
+                  </div>
+                </div>
+          
+                <div class="grid-item large">
+                  <div class="card-front">
+                    <img src="img/lil-dancy-dance.png" alt="Lil Dancey-Dance">
+                    <span class="overlay-text">Lil Dancey-Dance</span>
+                  </div>
+                  <div class="card-back">
+                    <h3>Lil Dancey-Dance</h3>
+                    <p>Character illustration showcasing movement and expression</p>
+                    <div class="project-links">
+                      <a href="https://drive.google.com/file/d/112-6z4NzMvPURuXlweg4oT3gl_8JzaIW/view?usp=drive_link" class="view-link">View</a>
+                    </div>
+                  </div>
+                </div>
                 
-                <div class="grid-item medium"><img src="img/fantasy café .png"></div>
-                <div class="grid-item large"><img src="img/lil-dancy-dance.png"> </div>
-                <div class="grid-item medium"><img src="img/Banana.png"></div>
-                <div class="grid-item small"><img src="img/bloop character board - colored.png"></div>
-                <div class="grid-item small"><img src="img/bloop bone.png"></div>
-                <div class="grid-item tall"><img src="img/Banana inspired.png"></div>
-                <div class="grid-item wide"><img src="img/desert landscape.png"></div>
-                <div class="grid-item tall"><img src="img/X-Lakin with a gun.png"></div>
-                <div class="grid-item small"><img src="img/frat demon boy.png"></div>
-                <div class="grid-item medium"><img src="img/trippy hell.JPG"></div>
-                <div class="grid-item medium"><img src="img/girls girls girls.JPG"></div>
-                <div class="grid-item double-horizontal"><img src="img/albalad.png"></div>
+                <div class="grid-item medium">
+                  <div class="card-front">
+                    <img src="img/Banana.png" alt="Banana">
+                    <span class="overlay-text">Banana :]</span>
+                  </div>
+                  <div class="card-back">
+                    <h3>Banana :]</h3>
+                    <p>The banana that the girl was based on!</p>
+                    <div class="project-links">
+                      <a href="https://drive.google.com/file/d/1Ca2OOQpKVYXFg4tAu88jA2IkLofdlIOP/view?usp=drive_link" class="view-link">View</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="grid-item small">
+                  <div class="card-front">
+                    <img src="img/bloop character board - colored.png" alt="Bloop character">
+                    <span class="overlay-text">Bloop</span>
+                  </div>
+                  <div class="card-back">
+                    <!-- <h3>Bloop :3</h3>
+                    <p>Bloop was made for a Ministry of Education/ Mawhiba commission for a game!</p> -->
+                    <div class="project-links">
+                      <a href="#" class="view-link">View</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="grid-item small">
+                  <div class="card-front">
+                    <img src="img/bloop bone.png" alt="Bone of bloop">
+                    <span class="overlay-text">De@d Bloop :P</span>
+                  </div>
+                  <div class="card-back">
+                    <!-- <h3>De@d Bloop :P</h3>
+                    <p>Bloop was made for a Ministry of Education/ Mawhiba commission for a game!</p> -->
+                    <div class="project-links">
+                      <a href="https://drive.google.com/file/d/1gQU23t2ulruff7gra7qlSj9V17lDPMqR/view?usp=drive_link" class="view-link">View</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="grid-item tall">
+                  <div class="card-front">
+                    <img src="img/Banana inspired.png" alt="Banana-inspired character">
+                    <span class="overlay-text">Banana Inspired</span>
+                  </div>
+                  <div class="card-back">
+                    <h3>Banana Inspired</h3>
+                    <p>Character developed after a banana inspo</p>
+                    <div class="project-links">
+                      <a href="https://drive.google.com/file/d/1M1Nk4TFlwxY1OZIm2yidGXUQXCx-Z3CC/view?usp=drive_link" class="view-link">View</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="grid-item wide">
+                  <div class="card-front">
+                    <img src="img/desert landscape.png" alt="Desert landscape">
+                    <span class="overlay-text">Saudi Deserts</span>
+                  </div>
+                  <div class="card-back">
+                    <h3>Saudi Deserts</h3>
+                    <p>How the Saudi desert look like in a dream</p>
+                    <div class="project-links">
+                      <a href="https://drive.google.com/file/d/1sFy8xBOKFfQO6PIG4dcIL5pZhwRrID_Y/view?usp=drive_link" class="view-link">View</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="grid-item tall">
+                  <div class="card-front">
+                    <img src="img/X-Lakin with a gun.png" alt="X-Lakin w/ gun">
+                    <span class="overlay-text">X-Lakin Intro</span>
+                  </div>
+                  <div class="card-back">
+                    <h3>X-Lakin Intro</h3>
+                    <p>First look at OC, X-Lakin!</p>
+                    <div class="project-links">
+                      <a href="https://drive.google.com/file/d/1vEPbEZBaW0r2H6WDSOBM_i6f2NKSApnM/view?usp=drive_link" class="view-link">View</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="grid-item small">
+                  <div class="card-front">
+                    <img src="img/frat demon boy.png" alt="Frat demon art">
+                    <span class="overlay-text">Frat Demon</span>
+                  </div>
+                  <div class="card-back">
+                    <!-- <h3>Frat Demon</h3>
+                    <p>My entiry to a DIYS trend! Have you ever wondered how a demon would look like as a frat?</p> -->
+                    <div class="project-links">
+                      <a href="https://drive.google.com/file/d/1dFGGXjLsLkjNU3_rcF5M7Lwvfbzy2B88/view?usp=drive_link" class="view-link">View</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="grid-item medium">
+                  <div class="card-front">
+                    <img src="img/trippy hell.JPG" alt="Trippy Hell">
+                    <span class="overlay-text">Triqqy H3ll</span>
+                  </div>
+                  <div class="card-back">
+                    <h3>Trippy Hell</h3>
+                    <p>Embodiment of the song Hot Milk - Wide Awake</p>
+                    <div class="project-links">
+                      <a href="https://drive.google.com/file/d/1Ck0hvklSMyKFP19Z1z818sjaK7jSTuBQ/view?usp=drive_link" class="view-link">View</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="grid-item medium">
+                  <div class="card-front">
+                    <img src="img/girls girls girls.JPG" alt="Sketches of girls">
+                    <span class="overlay-text">Girls, girls, and girls</span>
+                  </div>
+                  <div class="card-back">
+                    <h3>Girls, girls, and girls</h3>
+                    <p>Sketches of beautiful women</p>
+                    <div class="project-links">
+                      <a href="https://drive.google.com/file/d/1oDK-vLgwfaIFrVDp3_l_KWRMEIhCcXdQ/view?usp=drive_link" class="view-link">View</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="grid-item double-horizontal">
+                  <div class="card-front">
+                    <img src="img/albalad.png" alt="Historic Jeddah">
+                    <span class="overlay-text">Al-Balad</span>
+                  </div>
+                  <div class="card-back">
+                    <h3>Al-Balad</h3>
+                    <p>History of my hometown, Jeddah :]</p>
+                    <div class="project-links">
+                      <a href="https://drive.google.com/file/d/1BN7zBuxC_H44O7RhHsaFYIhEPow2XcHL/view?usp=drive_link" class="view-link">View</a>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- =========================== -->
+
+                <div class="grid-item medium">
+                  <div class="card-front">
+                    <img src="img/Islmi's Gifty.png" alt="Fantasy Café">
+                    <span class="overlay-text">Pixel Moon</span>
+                  </div>
+                  <div class="card-back">
+                    <h3>Pixel Moon</h3>
+                    <p>Profile picture design in Pixel Art</p>
+                    <div class="project-links">
+                      <a href="https://drive.google.com/file/d/1ejrE0cyyDErOVMu9wQzUx8Tt-6ifccM6/view?usp=drive_link" class="view-link">View</a>
+                    </div>
+                  </div>
+                </div>
+          
+                <div class="grid-item large">
+                  <div class="card-front">
+                    <img src="img/self-portrait.png" alt="Self-portrait in cartoon">
+                    <span class="overlay-text">Slutty Self-Portrait</span>
+                  </div>
+                  <div class="card-back">
+                    <h3>Slutty Self-Portrait </h3>
+                    <p>How I'd dress if I could ):</p>
+                    <div class="project-links">
+                      <a href="https://drive.google.com/file/d/1T0H8tCSjGZzOV0AdlaBOOywDG6A3vC4M/view?usp=drive_link" class="view-link">View</a>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="grid-item medium">
+                  <div class="card-front">
+                    <img src="img/robotics-logo.png" alt="logo">
+                    <span class="overlay-text">Queer Cyb0rg</span>
+                  </div>
+                  <div class="card-back">
+                    <h3>Queer Cyb0rg</h3>
+                    <p>NYU Robotics Club's mascot in pixel art</p>
+                    <div class="project-links">
+                      <a href="https://drive.google.com/file/d/19wdVGKnQ1E9lpUCZ2R11CfRXOG1zkCCC/view?usp=drive_link" class="view-link">View</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="grid-item small">
+                  <div class="card-front">
+                    <img src="img/bloop character board - colored.png" alt="Bloop character">
+                    <span class="overlay-text">Bloop</span>
+                  </div>
+                  <div class="card-back">
+                    <!-- <h3>Bloop :3</h3>
+                    <p>Bloop was made for a Ministry of Education/ Mawhiba commission for a game!</p> -->
+                    <div class="project-links">
+                      <a href="https://drive.google.com/file/d/1iVghDHTpYgVSA0LFAkHzPcksWymm1gqr/view?usp=drive_link" class="view-link">View</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="grid-item small">
+                  <div class="card-front">
+                    <img src="img/bloop bone.png" alt="Bone of bloop">
+                    <span class="overlay-text">De@d Bloop :P</span>
+                  </div>
+                  <div class="card-back">
+                    <!-- <h3>De@d Bloop :P</h3>
+                    <p>Bloop was made for a Ministry of Education/ Mawhiba commission for a game!</p> -->
+                    <div class="project-links">
+                      <a href="#" class="view-link">View</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="grid-item tall">
+                  <div class="card-front">
+                    <img src="img/Rini Character Design - sketch.png" alt="Banana-inspired character">
+                    <span class="overlay-text">Rini, the Teen</span>
+                  </div>
+                  <div class="card-back">
+                    <h3>Rini, the Teen</h3>
+                    <p>Game character first look</p>
+                    <div class="project-links">
+                      <a href="https://drive.google.com/file/d/1u64vJGBmavOBkE3uHKLnDm_vwHLXYEAw/view?usp=drive_link" class="view-link">View</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="grid-item wide">
+                  <div class="card-front">
+                    <img src="img/helios-1.png" alt="OC, Helios Design">
+                    <span class="overlay-text">Helios Character Design</span>
+                  </div>
+                  <div class="card-back">
+                    <h3>Helios Character Design</h3>
+                    <p>Helios, sun Greek, is a Pheonix-inspired character</p>
+                    <div class="project-links">
+                      <a href="#" class="view-link">View</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="grid-item tall">
+                  <div class="card-front">
+                    <img src="img/hanahaki-1.png" alt="Hanahaki represent">
+                    <span class="overlay-text">H@/naha/ki</span>
+                  </div>
+                  <div class="card-back">
+                    <h3>H@/naha/ki</h3>
+                    <p>
+                      Hanahaki is a Japanese, fictional disease, where unrequited love grows flowers in the lungs 
+                    </p>
+                    <div class="project-links">
+                      <a href="#" class="view-link">View</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="grid-item small">
+                  <div class="card-front">
+                    <img src="img/robotics-logo-2.png" alt="Evil pixely robot">
+                    <span class="overlay-text">Just a R0b0t ):</span>
+                  </div>
+                  <div class="card-back">
+                    <!-- <h3>Frat Demon</h3>
+                    <p>My entiry to a DIYS trend! Have you ever wondered how a demon would look like as a frat?</p> -->
+                    <div class="project-links">
+                      <a href="https://drive.google.com/file/d/15yQBwVOgnuJzakaaZLw2bj42f4iEVrCR/view?usp=drive_link" class="view-link">View</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="grid-item medium">
+                  <div class="card-front">
+                    <img src="img/Jambo-Logo.png" alt="Logo of Jambo">
+                    <span class="overlay-text">J@mbo Logo</span>
+                  </div>
+                  <div class="card-back">
+                    <h3>J@mbo Logo</h3>
+                    <p>Pixely computer ++ Art</p>
+                    <div class="project-links">
+                      <a href="https://drive.google.com/file/d/1qsRiA0itTO-4wKLycmF_zVyO_RNTExx7/view?usp=drive_link" class="view-link">View</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="grid-item medium">
+                  <div class="card-front">
+                    <img src="img/islmi.png" alt="Art of partner, Islam">
+                    <span class="overlay-text">Beautiful, beautiful boy</span>
+                  </div>
+                  <div class="card-back">
+                    <h3>Beautiful, beautiful boy</h3>
+                    <p>Cartoonish portrait of my beautiful partner, Islam</p>
+                    <div class="project-links">
+                      <a href="https://drive.google.com/file/d/1H1IHrvNPBWDMbwIt8k2eRmaQ3wdd0tys/view?usp=drive_link" class="view-link">View</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="grid-item double-horizontal">
+                  <div class="card-front">
+                    <img src="img/intro-complete.png" alt="Game Intro">
+                    <span class="overlay-text">SAJ Intro</span>
+                  </div>
+                  <div class="card-back">
+                    <h3>SAJ Intro</h3>
+                    <p>Intro art for my game, SAJ :3</p>
+                    <div class="project-links">
+                      <a href="https://drive.google.com/file/d/1D9PYsbi6Yus5IfQd6JYKI0_nKsMdWlTE/view?usp=drive_link" class="view-link">View</a>
+                      
+                    </div>
+                  </div>
+                </div>
                 
               </div>
             </div>
           </section>
           <!-- END OF THUMBS!!! -->
+
+          <!-- THUMBS ANIMATIONS -->
+          <script>
+            // Add click event listeners to all grid items
+            document.querySelectorAll('.grid-item').forEach(item => {
+              item.addEventListener('click', () => {
+                item.classList.toggle('flipped');
+              });
+            });
+          </script>
+          <!-- END OF THUMBS ANIMATIONS -->
           
           <!-- empty div to create a gap -->
           <div class="spacer"></div> 
@@ -191,6 +565,8 @@
                   <span class="skill-item">Figma (UI/UX)</span>
                   <span class="skill-item">Java</span>
                   <span class="skill-item">JavaScript</span>
+                  <span class="skill-item">Processing</span>
+                  <span class="skill-item">P5.js</span>
                 </div>
               </div>
 
@@ -220,7 +596,206 @@
           <!-- empty div to create a gap -->
           <div class="spacer"></div> 
 
+          <!-- draw 4 me! -->
+          <section class="drawing-section">
+            <div class="tag">Dr@w 4 me!</div>
+            <h2 class="desc">Leave your mark on my portfolio :]</h2>
+            
+            <div class="drawing-container">
+              <div class="controls">
+                <input type="color" id="colorPicker" value="#000000" class="color-input">
+                <input type="range" id="brushSize" min="1" max="20" value="5" class="brush-input">
+                <button id="clearBtn" class="control-btn">Clear</button>
+                <button id="saveBtn" class="control-btn">Send Drawing</button>
+              </div>
+              <canvas id="drawingBoard" width="600" height="400"></canvas>
+            </div>
+
+            <div id="sendingOverlay">
+              Sending drawing...
+            </div>
+          </section>
+
+          <script>
+            // public key
+            emailjs.init("4ZMyGUw8l-lWYOOfh");
+
+            const canvas = document.getElementById('drawingBoard');
+            const ctx = canvas.getContext('2d');
+            const colorPicker = document.getElementById('colorPicker');
+            const brushSize = document.getElementById('brushSize');
+            const clearBtn = document.getElementById('clearBtn');
+            const saveBtn = document.getElementById('saveBtn');
+            const sendingOverlay = document.getElementById('sendingOverlay');
+
+            let isDrawing = false;
+            let lastX = 0;
+            let lastY = 0;
+
+            // start with white background
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // start with a round line
+            ctx.strokeStyle = colorPicker.value;
+            ctx.lineJoin = 'round';
+            ctx.lineCap = 'round';
+            ctx.lineWidth = brushSize.value;
+
+            function getMousePos(canvas, e) {
+              const rect = canvas.getBoundingClientRect();
+              const scaleX = canvas.width / rect.width;
+              const scaleY = canvas.height / rect.height;
+              return {
+                x: (e.clientX - rect.left) * scaleX,
+                y: (e.clientY - rect.top) * scaleY
+              };
+            }
+
+            function getTouchPos(canvas, e) {
+              const rect = canvas.getBoundingClientRect();
+              const scaleX = canvas.width / rect.width;
+              const scaleY = canvas.height / rect.height;
+              return {
+                x: (e.touches[0].clientX - rect.left) * scaleX,
+                y: (e.touches[0].clientY - rect.top) * scaleY
+              };
+            }
+
+            function startDrawing(e) {
+              isDrawing = true;
+              const pos = e.type.includes('mouse') ? getMousePos(canvas, e) : getTouchPos(canvas, e);
+              lastX = pos.x;
+              lastY = pos.y;
+            }
+
+            function draw(e) {
+              if (!isDrawing) return;
+              e.preventDefault();
+
+              const pos = e.type.includes('mouse') ? getMousePos(canvas, e) : getTouchPos(canvas, e);
+
+              ctx.beginPath();
+              ctx.moveTo(lastX, lastY);
+              ctx.lineTo(pos.x, pos.y);
+              ctx.stroke();
+
+              lastX = pos.x;
+              lastY = pos.y;
+            }
+
+            function stopDrawing() {
+              isDrawing = false;
+            }
+
+            // mouse events and stuff
+            canvas.addEventListener('mousedown', startDrawing);
+            canvas.addEventListener('mousemove', draw);
+            canvas.addEventListener('mouseup', stopDrawing);
+            canvas.addEventListener('mouseout', stopDrawing);
+
+            // as long as the mouse is touching -> draw
+            canvas.addEventListener('touchstart', (e) => {
+              e.preventDefault();
+              startDrawing(e);
+            });
+            
+            canvas.addEventListener('touchmove', (e) => {
+              e.preventDefault();
+              draw(e);
+            });
+            
+            canvas.addEventListener('touchend', (e) => {
+              e.preventDefault();
+              stopDrawing();
+            });
+
+            // color and conrtol stuff
+            colorPicker.addEventListener('input', (e) => {
+              ctx.strokeStyle = e.target.value;
+            });
+
+            brushSize.addEventListener('input', (e) => {
+              ctx.lineWidth = e.target.value;
+            });
+
+            clearBtn.addEventListener('click', () => {
+              ctx.fillStyle = 'white';
+              ctx.fillRect(0, 0, canvas.width, canvas.height);
+              ctx.strokeStyle = colorPicker.value;
+            });
+
+            saveBtn.addEventListener('click', async () => {
+              // if canvas is empty -> send elrt
+              const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+              const isEmpty = !imageData.some(channel => channel !== 255);
+              
+              if (isEmpty) {
+                  alert('Please draw something before sending!');
+                  return;
+              }
+
+              sendingOverlay.style.display = 'flex';
+              
+              try {
+                  // compress image to simplify it in email
+                  const dataURL = canvas.toDataURL('image/jpeg', 0.5); // JPEG w/ 50% quality
+                  
+                  const maxChunkLength = 25000; // EmailJS has a limit on message size
+                  const chunks = [];
+                  let currentChunk = '';
+                  
+                  for (let i = 0; i < dataURL.length; i++) {
+                      currentChunk += dataURL[i];
+                      if (currentChunk.length >= maxChunkLength) {
+                          chunks.push(currentChunk);
+                          currentChunk = '';
+                      }
+                  }
+                  if (currentChunk) {
+                      chunks.push(currentChunk);
+                  }
+
+                  // service and template IDs from EmailJS
+                  await emailjs.send(
+                      "service_sflmbin",
+                      "template_fblc1xo",
+                      {
+                          drawing_info: `Drawing submission (Part 1/${chunks.length})`,
+                          timestamp: new Date().toLocaleString(),
+                          drawing: chunks[0],
+                          total_parts: chunks.length
+                      }
+                  );
+
+                  for (let i = 1; i < chunks.length; i++) {
+                      await emailjs.send(
+                          "service_sflmbin",
+                          "template_fblc1xo",
+                          {
+                              drawing_info: `Drawing submission (Part ${i + 1}/${chunks.length})`,
+                              drawing: chunks[i],
+                              timestamp: new Date().toLocaleString()
+                          }
+                      );
+                  }
+                  
+                  alert('Drawing sent successfully!');
+                  ctx.fillStyle = 'white';
+                  ctx.fillRect(0, 0, canvas.width, canvas.height);
+                  ctx.strokeStyle = colorPicker.value;
+              } catch (error) {
+                  console.error('Error sending drawing:', error);
+                  alert('Failed to send drawing. Please try again.');
+              } finally {
+                  sendingOverlay.style.display = 'none';
+              }
+          });
+          </script>
+          <!-- end of draw 4 me! -->
+
           <!-- FOOTER -->
+           <!-- :desc: svg codes for icons were found all over google -->
           <footer class="footer">
             <div class="footer-content">
               <div class="social-links">

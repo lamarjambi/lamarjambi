@@ -1,7 +1,10 @@
-/* global styles */
+/* Scripter: Jambo 
+DM 2193 - Midterm Project 1
+anything commenetd is a failed attempt at something :P */
 
 @import url('https://fonts.googleapis.com/css2?family=Dokdo&display=swap');
 
+/* global styles */
 * {
   margin: 0;
   padding: 0;
@@ -18,6 +21,7 @@ body {
   overflow-x: hidden;
   letter-spacing: 0;
   kerning: 0;
+  cursor: url('../img/kirby-cursor.png'), auto;
 }
 
 img {
@@ -29,12 +33,12 @@ img {
   height: 80px; 
 }
 
-.section-spacer {
-  height: 80px;
-}
 
+/* ============= NAVBAR STUFF ============= */
+/* :desc: followed a youtube tutorial and tried to 
+give my own spin */
 .vertical-container {
-  top: 15%;
+  top: 100px;
   left: 5%;
   height: 70px;
   width: 70px;
@@ -44,67 +48,24 @@ img {
   transition: 0.4s ease;
   z-index: 1000;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  /* cursor: grab;  */
+}
+
+#drag {
+  cursor: url('../img/kirby-cursor.png'), auto;
+  /* z-index: 10; */
+  position: fixed;
 }
 
 .vertical-container.active {
-  height: 420px;
-}
-
-.toggle-box {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  width: 100%;
-  border-radius: 50px;
+  height: 355px;
   background-color: #faf0dd;
-  cursor: pointer;
+  cursor: url('../img/kirby-cursor.png'), auto;
 }
 
-/* horizontal line */
-.icon {
-  position: absolute;
-  height: 4px;
-  width: 35px;
-  background-color: #ec6ba7;
-  border-radius: 50px;
-  top: 35px;
-  left: 35px;
-  transform: translate(-50%, -50%);
-  transition: 0.3s ease;
-}
-
-/* vertical line */
-.icon::before {
-  content: '';
-  position: absolute;
-  width: 4px;
-  height: 35px;
-  background-color: #ec6ba7;
-  border-radius: 50px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  transition: 0.3s ease;
-}
-
-/* Animation for active state */
-.toggle-box.active .icon {
-  transform: translate(-50%, -50%) rotate(45deg); /* Rotate by 45 degrees */
-}
-
-.toggle-box.active .icon::before {
-  transform: translate(-50%, -50%) rotate(0deg); /* Rotate by -45 degrees */
-}
-
-.toggle-box:hover .icon,
-.toggle-box:hover .icon::before {
-  background-color: #ec6ba7;
-}
+/* .vertical-container.active {
+  height: 420px;
+} */
 
 .nav-items {
   position: absolute;
@@ -131,13 +92,14 @@ img {
   justify-content: center;
   align-items: center;
 }
-.nav-items img {
+
+/* .nav-items img {
   width: 40px;  
   height: auto;
   background-color: #faf0dd;
   display: block;
   margin: 0 auto;  
-}
+} */
 
 .nav-items svg {
   background-color: #faf0dd;
@@ -145,20 +107,6 @@ img {
   width: 24px;
   height: 24px;
 } 
-
-.vertical-container {
-  top: 150px;
-  left: 5%;
-  height: 70px;
-  width: 70px;
-  background-color: #faf0dd; 
-  border-radius: 50px;
-  position: fixed;
-  transition: 0.4s ease;
-  z-index: 1000;
-  overflow: hidden;
-  cursor: grab; 
-}
 
 ul.nav-items {
   background: #faf0dd;
@@ -199,7 +147,7 @@ ul.nav-items {
 }
 
 .nav-items .social-icon:hover {
-  color: #d84f8b; 
+  color: #547dfd; 
 }
 
 .vertical-container.active .nav-items {
@@ -207,12 +155,61 @@ ul.nav-items {
   pointer-events: all;
 }
 
-.vertical-container.active {
-  height: 355px;
+.toggle-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  border-radius: 50px;
   background-color: #faf0dd;
-  cursor: grabbing;
+  cursor: url('../img/kirby-cursor.png'), auto;
 }
 
+/* horizontal line */
+.icon {
+  position: absolute;
+  height: 4px;
+  width: 35px;
+  background-color: #ec6ba7;
+  border-radius: 50px;
+  top: 35px;
+  left: 35px;
+  transform: translate(-50%, -50%);
+  transition: 0.3s ease;
+}
+
+/* vertical line */
+.icon::before {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 35px;
+  background-color: #ec6ba7;
+  border-radius: 50px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: 0.3s ease;
+}
+
+.toggle-box.active .icon {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.toggle-box.active .icon::before {
+  color: red;
+  transform: translate(-50%, -50%) rotate(0deg); 
+}
+
+.toggle-box:hover .icon,
+.toggle-box:hover .icon::before {
+  background-color: #ec6ba7;
+}
+/* ============= END OF NAVBAR ============= */
+
+/* ============= HEADER + INTRO TEXTBOX ============= */
 .hero {
   width: 100vw;
   max-height: 100vh;
@@ -246,13 +243,13 @@ ul.nav-items {
 }
 
 .lead-para {
-  color: #faf0dd;
+  color: #000000;
   font-family: 'Dokdo', sans-serif; 
   font-size: 26px; 
   line-height: 1.5; 
-  -webkit-text-stroke: 1px #000000; 
 }
 
+/* image */
 .about div:last-child {
   flex: 1;
   display: flex;
@@ -265,8 +262,9 @@ ul.nav-items {
   height: auto;
   border-radius: 5.5%;
 }
+/* ============= END OF HEADER + INTRO TEXTBOX ============= */
 
-
+/* ============= PROJECTS ============= */
 .project-section {
   font-family: "Press Start 2P", system-ui;
   width: 65%;
@@ -293,72 +291,113 @@ ul.nav-items {
 .desc {
   font-family: "Dokdo";
   color: #faf0dd;
-  font-size: 26px;
+  font-weight: lighter;
+  font-size: 24px;
   margin-bottom: 40px;
-  -webkit-text-stroke: 0.4px #000000;
 }
 
-.grid {
-  display: grid;
-  grid-template-rows: repeat(6, 1fr);
-  grid-template-columns: repeat(8, 1fr);
-  grid-gap: 20px;
-  width: 100%;
-  height: 200vh;
-  max-width: 500vw;
+.games-column {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
-.grid-item {
-  background-color: #547dfd;
+.game-item {
+  background-color: #c9a0df;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 15px;
   position: relative; 
+  overflow: hidden; /* Changed to visible to show decorations */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.4s, box-shadow 0.3s;
+  transform-style: preserve-3d;
+  cursor: url('../img/kirby-cursor.png'), auto;
+  border: 1px solid #000;
+  background: transparent;
 }
 
-.grid-item img {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover; 
-    overflow: hidden;
+.game-item::before,
+.game-item::after {
+  content: '♣';
+  position: absolute;
+  font-size: 42px;
+  color: #ec6ba7;
+  z-index: 10;
+  background-color: transparent;
+  padding: 0.5rem;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+  pointer-events: none;
+  border-radius: 10px;
 }
 
-.grid-item img:hover {
+.game-item::before {
+  top: 0;
+  left: 0;
+}
+
+.game-item::after {
+  bottom: 0;
+  right: 0;
+  transform: rotate(180deg);
+}
+
+.game-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.game-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  cursor: url('../img/kirby-cursor.png'), auto;
+}
+
+.game-item video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.overlay-text {
+  color: #c9a0df;
+}
+
+.game-item .overlay-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  color: black;
+  font-size: 14px;
+  padding: 10px 20px;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 8px;
+  width: auto;
+  min-width: 200px;
+  border: 1px solid #000;
+  font-family: "Press Start 2P", system-ui;
+}
+
+.game-item:hover .overlay-text {
+  opacity: 1;
+}
+
+.game-item img:hover {
   opacity: 60%;
 }
+/* ============= END OF PROJECTS ============= */
 
-.grid-item.medium {
-  grid-row: span 2;
-  grid-column: span 2;
-}
-
-.grid-item.large {
-  grid-row: span 3;
-  grid-column: span 3;
-}
-
-.grid-item.small {
-  grid-row: span 1;
-  grid-column: span 1;
-}
-
-.grid-item.tall {
-  grid-row: span 3;
-  grid-column: span 2;
-}
-
-.grid-item.wide {
-  grid-row: span 2;
-  grid-column: span 3;
-}
-
-.grid-item.double-horizontal {
-  grid-row: span 1;
-  grid-column: span 2;
-}
-
+/* ============= SKILLS ============= */
 .skills-section {
   width: 65%;
   margin: auto;
@@ -403,12 +442,14 @@ ul.nav-items {
 .skill-item:hover {
   background-color: rgba(216, 79, 139, 0.2);
 }
+/* ============= END OF SKILLS ============= */
 
+/* ============= FOOTER AND SVG ============= */
 .footer {
   background-color: rgba(253, 210, 59, 1);
   color: #ec6ba7;
   padding: 2rem 0;
-  font-family: 'Arial', sans-serif;
+  font-family: 'Dokdo', 'Press Start 2P';
 }
 
 .footer-content {
@@ -443,8 +484,77 @@ ul.nav-items {
 .copyright p {
   margin: 0.25rem 0;
 }
+/* ============= END OF FOOTER AND SVG CODES ============= */
 
 @media (max-width: 768px) {
+  /* ============= NAVBAR STUFF ============= */
+  .vertical-container {
+    position: fixed;
+    top: 15%;
+    left: 50%;
+    flex-direction: row;
+    transform: translateX(-50%); /* center */
+    display:flex;
+  }
+
+  .nav-items-top {
+    display: none;
+  }
+
+  .nav-items {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 90%;
+    padding: 0;
+    list-style: none;
+    pointer-events: all;
+    display: flex; /* added */
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background: #faf0dd;
+    display: none; 
+    margin-right: 1em;
+  }
+
+  .nav-items svg {
+    width: 20px;
+    height: 20px;
+    color: #ec6ba7; 
+  }
+
+  .nav-items a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+  }
+
+  .vertical-container.active {
+    width: 375px;
+    height: 70px;
+  }
+
+  .vertical-container.active .nav-items {
+    opacity: 1;
+    pointer-events: all;
+    display: flex; 
+  }
+
+  .nav-items-bottom {
+    display: none; 
+  }
+
+  /* fixing mobile issue with not showing icons w/ z-index */
+  .toggle-box {
+    z-index: 1000; 
+    width: 20%;
+  }
+
+  /* ============= END OF NAVBAR STUFF ============= */
+
+  /* ============= HEADER + INTRO TEXTBOX ============= */
   .about {
     flex-direction: column;
     padding: 20px;
@@ -469,7 +579,9 @@ ul.nav-items {
     flex-direction: column; 
     gap: 2rem;  
   }
+  /* ============= END OF HEADER + INTRO TEXTBOX ============= */
 
+  /* ============= PROJECTS (GRID) ============= */
   .grid {
     display: flex;
     flex-direction: column;
@@ -481,7 +593,7 @@ ul.nav-items {
     font-family: "Press Start 2P", system-ui;
     width: 90%;
     height: auto;
-    margin-bottom: 6600px;
+    margin-bottom: 14150px;
   }
 
   .grid-item {
@@ -510,7 +622,9 @@ ul.nav-items {
     object-fit: cover;
     overflow: hidden;
   }
+  /* ============= END OF PROJECTS (GRID) ============= */
 
+  /* ============= SKILLS ============= */
   .skills-section {
     width: 90%;
   }
@@ -523,7 +637,9 @@ ul.nav-items {
   .category-name {
     margin-bottom: 10px;
   }
+  /* ============= END OF SKILLS ============= */
 
+  /* ============= FOOTER ============= */
   .footer-content {
     padding: 0 1rem;
   }
