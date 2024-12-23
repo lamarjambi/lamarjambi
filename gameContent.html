@@ -31,13 +31,14 @@
           <div class="spacer"></div> 
 
           <!-- NAVBARR -->
-          <div class="vertical-container">
+          <div class="vertical-container" id="drag">
             <a href="" class="toggle-box">
               <span class="icon"></span>
             </a>
           
             <ul class="nav-items">
 
+              <!-- ask about absolute vs relative path ): -->
               <li>
                 <a href="files/Lamar Jambi Resume (Updated).pdf" target="_blank">
                   <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 448 512">
@@ -75,13 +76,32 @@
             </ul>
           </div>
           <!-- END OF NAVBAR -->
-
+          
+          <!-- NAVBAR ANIMATIONSS -->
           <script>
+            // gsap.registerPlugin(Draggable);
+
+            // // Toggle functionality 
+            // const toggleClick = document.querySelector('.toggle-box');
+            // const verticalContainer = document.querySelector('.vertical-container');
+
+            // toggleClick.addEventListener('click', (e) => {
+            //   e.preventDefault(); 
+            //   toggleClick.classList.toggle('active');
+            //   verticalContainer.classList.toggle('active');
+            // });
+
+            // // GSAP draggable
+            // Draggable.create(".vertical-container", {
+            //   bounds: window,
+            //   inertia: true
+            // });
+
             const toggleClick = document.querySelector('.toggle-box');
             const verticalContainer = document.querySelector('.vertical-container');
             
             toggleClick.addEventListener('click', (e) => {
-              e.preventDefault(); 
+              e.preventDefault(); // Prevent the link from navigating
               toggleClick.classList.toggle('active');
               verticalContainer.classList.toggle('active');
             });
@@ -120,8 +140,8 @@
             }
 
             startDragging(dragElem);
-
           </script>
+          <!-- END OF NAVBAR ANIMATION -->
           
           <!-- hi people :3 -->
           <section class="about">
@@ -130,7 +150,7 @@
               <h3 class="heading">W3lc0me aboard >:3</h3>
               <p class="lead-para">
                 This is J@mbo (Lamar Jambi) :P. I'm an Integarted Design and Media, Computer Science, 
-                and Game Design student at New York University. Currently Based in Brooklyn, NY! Interested
+                and Game Design student at New York University. Currently based in Brooklyn, NY! Interested
                 in digital art, game development, and comnputer visison in entertainment :]
                 <!-- ligula velit mollis dui, et elementum enim orci vel erat. Nam luctus laoreet tellus quis tempus. 
                 Nam faucibus, augue placerat sagittis aliquam, felis turpis condimentum elit.
