@@ -52,24 +52,21 @@ give my own spin */
   transition: 0.4s ease;
   z-index: 1000;
   overflow: hidden;
+  cursor: url('../img/mouse-cursor.png'), auto;
   /* cursor: grab;  */
 }
 
 #drag {
   cursor: url('../img/mouse-cursor.png'), auto;
   /* z-index: 10; */
-  position: fixed;
+  /* position: fixed; */
 }
 
 .vertical-container.active {
   height: 355px;
   background-color: #faf0dd;
-  cursor: url('../img/mouse-cursor.png'), auto;
+  /* cursor: grabbing; */
 }
-
-/* .vertical-container.active {
-  height: 420px;
-} */
 
 .nav-items {
   position: absolute;
@@ -86,6 +83,7 @@ give my own spin */
   align-items: center;
   gap: 35px; 
   background: #faf0dd;
+  cursor: url('../img/mouse-cursor.png'), auto;
 }
 
 .nav-items li {
@@ -110,6 +108,7 @@ give my own spin */
   fill: currentColor; 
   width: 24px;
   height: 24px;
+  cursor: url('../img/mouse-cursor.png'), auto;
 } 
 
 ul.nav-items {
@@ -139,10 +138,12 @@ ul.nav-items {
   background: #faf0dd;
   justify-content: center;
   align-items: center;
+  cursor: url('../img/mouse-cursor.png'), auto;
 }
 
 .nav-items a:hover {
   color: #ec6ba7;
+  cursor: url('../img/mouse-cursor.png'), auto;
 }
 
 .nav-items .social-icon {
@@ -155,11 +156,13 @@ ul.nav-items {
 }
 
 .vertical-container.active .nav-items {
+  cursor: url('../img/mouse-cursor.png'), auto;
   opacity: 1;
   pointer-events: all;
 }
 
 .toggle-box {
+  order: -1;
   position: relative;
   display: flex;
   align-items: center;
@@ -182,6 +185,7 @@ ul.nav-items {
   left: 35px;
   transform: translate(-50%, -50%);
   transition: 0.3s ease;
+  cursor: url('../img/mouse-cursor.png'), auto;
 }
 
 /* vertical line */
@@ -196,15 +200,18 @@ ul.nav-items {
   left: 50%;
   transform: translate(-50%, -50%);
   transition: 0.3s ease;
+  cursor: url('../img/mouse-cursor.png'), auto;
 }
 
 .toggle-box.active .icon {
   transform: translate(-50%, -50%) rotate(45deg);
+  cursor: url('../img/mouse-cursor.png'), auto;
 }
 
 .toggle-box.active .icon::before {
   color: red;
   transform: translate(-50%, -50%) rotate(0deg); 
+  cursor: url('../img/mouse-cursor.png'), auto;
 }
 
 .toggle-box:hover .icon,
