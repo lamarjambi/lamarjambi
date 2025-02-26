@@ -59,7 +59,7 @@ give my own spin */
 }
 
 .vertical-container.active {
-  height: 355px;
+  height: 425px;
   background-color: #faf0dd;
   /* cursor: grabbing; */
 }
@@ -370,6 +370,7 @@ ul.nav-items {
   width: 100%;
   height: auto;
   display: block;
+  cursor: url('../img/kirby-cursor.png'), auto;
 }
 
 .overlay-text {

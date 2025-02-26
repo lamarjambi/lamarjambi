@@ -63,7 +63,7 @@ give my own spin */
 }
 
 .vertical-container.active {
-  height: 355px;
+  height: 425px;
   background-color: #faf0dd;
   /* cursor: grabbing; */
 }
