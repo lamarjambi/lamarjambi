@@ -65,8 +65,8 @@ strong {
 }
 
 .card {
-    width: 200px;
-    height: 300px;
+    width: 30%;
+    height: 50%;
     border: 2px solid black;
     border-radius: 5.5%;
     overflow: hidden; 
