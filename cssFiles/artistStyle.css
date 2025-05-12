@@ -9,7 +9,7 @@ anything commenetd is a failed attempt at something :P */
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: rgba(253, 210, 59, 1);
+  /* background-color: rgba(253, 210, 59, 1); */
   cursor: url('../img/sparkle-cursor.png'), auto;
 }
 
@@ -23,6 +23,11 @@ body {
   letter-spacing: 0;
   kerning: 0;
   cursor: url('../img/sparkle-cursor.png'), auto;
+  background-image: url('../img/background.png');
+  background-attachment: fixed;      
+  background-size: cover;
+  background-repeat: repeat;
+  background-position: center;
 }
 
 img {

@@ -1,7 +1,7 @@
 /* global styles */
 * {
     box-sizing: border-box;
-    background-color: rgba(253, 210, 59, 1);
+    /* background-color: rgba(253, 210, 59, 1); */
 }
 
 body {
@@ -15,6 +15,7 @@ body {
     align-items: center; 
     /* background-color: rgba(253, 210, 59, 1); */
     padding: 20px;
+    background-image: url('../img/background.png');
 }
 
 .center-text {
