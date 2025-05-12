@@ -915,6 +915,15 @@
           </script>
           <!-- END OF SCROLLING LOADING ANIMATIONS -->
 
+          <!-- BACKGROUND SCROLLING -->
+          <script>
+            window.addEventListener('scroll', function () {
+              const scrolled = window.scrollY;
+              document.body.style.backgroundPositionY = -(scrolled * 0.3) + 'px';
+            });
+          </script>
+          <!-- END OF BACKGROUND SCROLLING -->
+          
     </body>
 
 

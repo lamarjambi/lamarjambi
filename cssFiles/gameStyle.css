@@ -9,7 +9,7 @@ anything commenetd is a failed attempt at something :P */
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: rgba(253, 210, 59, 1);
+  /* background-color: rgba(253, 210, 59, 1); */
 }
 
 html,
@@ -22,6 +22,11 @@ body {
   letter-spacing: 0;
   kerning: 0;
   cursor: url('../img/kirby-cursor.png'), auto;
+  background-image: url('../img/background.png');
+  background-repeat: repeat;
+  background-size: 100%; 
+  background-position: top left;
+  background-attachment: scroll; /* allows parallax logic */
 }
 
 img {
@@ -458,7 +463,7 @@ ul.nav-items {
 
 /* ============= FOOTER AND SVG ============= */
 .footer {
-  background-color: rgba(253, 210, 59, 1);
+  /* background-color: rgba(253, 210, 59, 1); */
   color: #ec6ba7;
   padding: 2rem 0;
   font-family: 'Dokdo', 'Press Start 2P';
