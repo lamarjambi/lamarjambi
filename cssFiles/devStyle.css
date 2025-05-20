@@ -22,11 +22,12 @@ body {
   letter-spacing: 0;
   kerning: 0;
   cursor: url('../img/mouse-cursor.png'), auto;
+  /* background-color: #f6d35a; */
   background-image: url('../img/background.png');
   background-repeat: repeat;
   background-size: 100%; 
   background-position: top left;
-  background-attachment: scroll; /* allows parallax logic */
+  background-attachment: scroll; /*allows parallax logic*/
 }
 
 a {
@@ -295,16 +296,6 @@ ul.nav-items {
   margin-top: 40px;
 }
 
-.experience-timeline::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 2px;
-  background-color: rgba(236, 107, 167, 0.2); 
-}
-
 .experience-item {
   position: relative;
   margin-bottom: 40px;
@@ -319,7 +310,7 @@ ul.nav-items {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background-color: #ec6ba7; 
+  background-color: #985cd2; 
   transform: translateX(-50%);
 }
 
@@ -328,7 +319,7 @@ ul.nav-items {
   left: -120px;
   top: 0;
   font-family: 'Press Start 2P', sans-serif;
-  color: #ec6ba7; 
+  color: #985cd2; 
   font-size: 12px;
 }
 
@@ -416,7 +407,7 @@ ul.nav-items {
 }
 
 .project-card {
-  background: rgb(192, 161, 50);
+  background: #faf0dd;
   border-radius: 12px;
   overflow: hidden;
   transition: transform 0.3s ease;

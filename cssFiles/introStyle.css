@@ -8,7 +8,7 @@ body {
     font-family: "Press Start 2P", system-ui;
     font-style: normal;
     margin: 0;
-    min-height: 100vh;
+    min-height: 105vh;
     display: flex;
     flex-direction: column;
     justify-content: center; 
@@ -16,11 +16,14 @@ body {
     /* background-color: rgba(253, 210, 59, 1); */
     padding: 20px;
     background-image: url('../img/background.png');
+    background-size: 100%; 
+    background-position: top left;  
 }
 
 .center-text {
     text-align: center;
     margin-bottom: 45px; 
+    font-size: 1.5rem;
 }
 
 strong {
@@ -92,7 +95,7 @@ strong {
 .card-overlay p {
     color: #000000;
     font-family: "Press Start 2P", system-ui;
-    font-size: 1em;
+    font-size: 24px;
     text-align: center;
     padding: 10px;
     background-color: transparent;
@@ -129,4 +132,27 @@ strong {
 
 .card:hover {
     animation: float 1.5s ease-in-out infinite; /* animation: is only available when we use @keyframe */
+}
+
+@media (max-width: 768px) {
+  .card {
+    width: 30%;
+    height: 50%;
+  }
+
+  .center-text {
+    font-size: 1rem;
+  }
+
+}
+
+@media (max-width: 414px) {
+  .card {
+    width: 30%;
+    height: 50%;
+  }
+
+  .center-text {
+    font-size: 0.7rem;
+  }
 }

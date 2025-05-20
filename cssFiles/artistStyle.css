@@ -510,6 +510,7 @@ ul.nav-items {
 
 .card-front {
   z-index: 2;
+  background: #985cd2;
 }
 
 .card-back {
