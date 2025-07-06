@@ -624,9 +624,6 @@
           </section>
 
           <script>
-            // public key
-            emailjs.init("4ZMyGUw8l-lWYOOfh");
-
             const canvas = document.getElementById('drawingBoard');
             const ctx = canvas.getContext('2d');
             const colorPicker = document.getElementById('colorPicker');
@@ -643,7 +640,6 @@
             ctx.fillStyle = 'white';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // start with a round line
             ctx.strokeStyle = colorPicker.value;
             ctx.lineJoin = 'round';
             ctx.lineCap = 'round';
@@ -695,29 +691,25 @@
               isDrawing = false;
             }
 
-            // mouse events and stuff
+            // Drawing Events
             canvas.addEventListener('mousedown', startDrawing);
             canvas.addEventListener('mousemove', draw);
             canvas.addEventListener('mouseup', stopDrawing);
             canvas.addEventListener('mouseout', stopDrawing);
-
-            // as long as the mouse is touching -> draw
             canvas.addEventListener('touchstart', (e) => {
               e.preventDefault();
               startDrawing(e);
             });
-            
             canvas.addEventListener('touchmove', (e) => {
               e.preventDefault();
               draw(e);
             });
-            
             canvas.addEventListener('touchend', (e) => {
               e.preventDefault();
               stopDrawing();
             });
 
-            // color and conrtol stuff
+            // Color and Brush
             colorPicker.addEventListener('input', (e) => {
               ctx.strokeStyle = e.target.value;
             });
@@ -732,72 +724,38 @@
               ctx.strokeStyle = colorPicker.value;
             });
 
-            saveBtn.addEventListener('click', async () => {
-              // if canvas is empty -> send elrt
+            saveBtn.addEventListener('click', () => {
               const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
               const isEmpty = !imageData.some(channel => channel !== 255);
-              
+
               if (isEmpty) {
-                  alert('Please draw something before sending!');
-                  return;
+                alert('Please draw something before sending!');
+                return;
               }
 
               sendingOverlay.style.display = 'flex';
-              
-              try {
-                  // compress image to simplify it in email
-                  const dataURL = canvas.toDataURL('image/jpeg', 0.5); // JPEG w/ 50% quality
-                  
-                  const maxChunkLength = 25000; // EmailJS has a limit on message size
-                  const chunks = [];
-                  let currentChunk = '';
-                  
-                  for (let i = 0; i < dataURL.length; i++) {
-                      currentChunk += dataURL[i];
-                      if (currentChunk.length >= maxChunkLength) {
-                          chunks.push(currentChunk);
-                          currentChunk = '';
-                      }
-                  }
-                  if (currentChunk) {
-                      chunks.push(currentChunk);
-                  }
 
-                  // service and template IDs from EmailJS
-                  await emailjs.send(
-                      "service_sflmbin",
-                      "template_fblc1xo",
-                      {
-                          drawing_info: `Drawing submission (Part 1/${chunks.length})`,
-                          timestamp: new Date().toLocaleString(),
-                          drawing: chunks[0],
-                          total_parts: chunks.length
-                      }
-                  );
+              const dataURL = canvas.toDataURL("image/png");
 
-                  for (let i = 1; i < chunks.length; i++) {
-                      await emailjs.send(
-                          "service_sflmbin",
-                          "template_fblc1xo",
-                          {
-                              drawing_info: `Drawing submission (Part ${i + 1}/${chunks.length})`,
-                              drawing: chunks[i],
-                              timestamp: new Date().toLocaleString()
-                          }
-                      );
-                  }
-                  
-                  alert('Drawing sent successfully!');
+              fetch("https://script.google.com/macros/s/AKfycbzS66dQtLULjCqKrAqgySs6qC9AcsKxPCHkb3hJZYLnfybylISSDpEEXHq-R3FJY6eR-Q/exec", {
+                method: "POST",
+                body: JSON.stringify({ image: dataURL })
+              })
+                .then(res => res.text())
+                .then(msg => {
+                  alert(msg || 'Drawing uploaded!');
                   ctx.fillStyle = 'white';
                   ctx.fillRect(0, 0, canvas.width, canvas.height);
                   ctx.strokeStyle = colorPicker.value;
-              } catch (error) {
-                  console.error('Error sending drawing:', error);
-                  alert('Failed to send drawing. Please try again.');
-              } finally {
+                })
+                .catch(err => {
+                  console.error("Error uploading drawing:", err);
+                  alert("Failed to upload drawing.");
+                })
+                .finally(() => {
                   sendingOverlay.style.display = 'none';
-              }
-          });
+                });
+            });
           </script>
           <!-- end of draw 4 me! -->
 
