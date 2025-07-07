@@ -745,11 +745,41 @@
             link.click();
           });
 
-          // Gallery management
+          // Gallery management with localStorage persistence
           let drawings = [];
+
+          // Load drawings from localStorage on page load
+          function loadDrawings() {
+            try {
+              const saved = localStorage.getItem('portfolioDrawings');
+              drawings = saved ? JSON.parse(saved) : [];
+            } catch (e) {
+              console.error('Error loading drawings:', e);
+              drawings = [];
+            }
+          }
+
+          // Save drawings to localStorage
+          function saveDrawings() {
+            try {
+              localStorage.setItem('portfolioDrawings', JSON.stringify(drawings));
+            } catch (e) {
+              console.error('Error saving drawings:', e);
+              // If storage is full, remove oldest drawings and try again
+              if (drawings.length > 10) {
+                drawings = drawings.slice(-10); // Keep only last 10
+                try {
+                  localStorage.setItem('portfolioDrawings', JSON.stringify(drawings));
+                } catch (e2) {
+                  console.error('Still failed to save after cleanup:', e2);
+                }
+              }
+            }
+          }
 
           function addToGallery(dataURL, timestamp) {
             drawings.push({ dataURL, timestamp });
+            saveDrawings(); // Persist to localStorage
             updateGallery();
           }
 
@@ -768,13 +798,15 @@
           }
 
           clearGalleryBtn.addEventListener('click', () => {
-            if (confirm('Clear all drawings from gallery?')) {
+            if (confirm('Clear all drawings from gallery? This cannot be undone.')) {
               drawings = [];
+              saveDrawings(); // Clear from localStorage too
               updateGallery();
             }
           });
 
-          // Initialize gallery
+          // Initialize gallery by loading saved drawings
+          loadDrawings();
           updateGallery();
           </script>
           <!-- end of draw 4 me! -->
