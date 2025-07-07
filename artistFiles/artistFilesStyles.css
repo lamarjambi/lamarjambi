@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    cursor: url('../img/sparkle-cursor.png'), auto;
 }
 
 body {
@@ -98,6 +99,7 @@ body {
     border: 3px solid #fff;
     position: relative;
     overflow: hidden;
+    cursor: url('../img/sparkle-cursor.png'), auto;
 }
 
 .tag::before {
