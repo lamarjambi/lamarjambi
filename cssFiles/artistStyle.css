@@ -791,6 +791,57 @@ ul.nav-items {
 }
 /* ============= END OF DRAWING CANVAS ============= */
 
+/* ============ GALLERY ============== */
+.gallery-section {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+  margin: 20px 0;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 10px;
+  border: 2px solid #ec6ba7;
+}
+
+.gallery-item {
+  position: relative;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  background: white;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.gallery-item .timestamp {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,0.7);
+  color: white;
+  padding: 5px;
+  font-size: 10px;
+  text-align: center;
+}
+
+.empty-gallery {
+  grid-column: 1 / -1;
+  padding: 40px;
+  color: #666;
+  font-style: italic;
+}
+/* ============= END OF GALLERY ============ */
+
 /* ============= MEDIA QUERY FOR MOBILE ============= */
 @media (max-width: 768px) {
   /* ============= NAVBAR STUFF ============= */

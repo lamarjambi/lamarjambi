@@ -91,24 +91,6 @@
           
           <!-- NAVBAR ANIMATIONSS -->
           <script>
-            // gsap.registerPlugin(Draggable);
-
-            // // Toggle functionality 
-            // const toggleClick = document.querySelector('.toggle-box');
-            // const verticalContainer = document.querySelector('.vertical-container');
-
-            // toggleClick.addEventListener('click', (e) => {
-            //   e.preventDefault(); 
-            //   toggleClick.classList.toggle('active');
-            //   verticalContainer.classList.toggle('active');
-            // });
-
-            // // GSAP draggable
-            // Draggable.create(".vertical-container", {
-            //   bounds: window,
-            //   inertia: true
-            // });
-
             const toggleClick = document.querySelector('.toggle-box');
             const verticalContainer = document.querySelector('.vertical-container');
             
@@ -159,7 +141,7 @@
           <section class="about">
 
             <div class="about-text">
-              <h3 class="heading">W3lc0me aboard >:3</h3>
+              <h3 class="heading">W3lc0me ab0@rd >:3</h3>
               <p class="lead-para">
                 This is J@mbo (Lamar Jambi) :P. I'm an Integrated Design and Media, Computer Science, 
                 and Game Design student at New York University. Currently based in Brooklyn, NY! Interested
@@ -613,149 +595,187 @@
                 <input type="color" id="colorPicker" value="#000000" class="color-input">
                 <input type="range" id="brushSize" min="1" max="20" value="5" class="brush-input">
                 <button id="clearBtn" class="control-btn">Clear</button>
-                <button id="saveBtn" class="control-btn">Send Drawing</button>
+                <button id="saveBtn" class="control-btn">Save Drawing</button>
+                <button id="downloadBtn" class="control-btn">Download</button>
               </div>
               <canvas id="drawingBoard" width="600" height="400"></canvas>
             </div>
 
-            <div id="sendingOverlay">
-              Sending drawing...
+            <!-- Gallery to show saved drawings -->
+            <div class="gallery-section">
+              <h3>Y0UR Gallery</h3>
+              <div id="drawingGallery" class="gallery-grid"></div>
+              <button id="clearGallery" class="control-btn">Clear Gallery</button>
             </div>
           </section>
 
           <script>
-            const canvas = document.getElementById('drawingBoard');
-            const ctx = canvas.getContext('2d');
-            const colorPicker = document.getElementById('colorPicker');
-            const brushSize = document.getElementById('brushSize');
-            const clearBtn = document.getElementById('clearBtn');
-            const saveBtn = document.getElementById('saveBtn');
-            const sendingOverlay = document.getElementById('sendingOverlay');
+          const canvas = document.getElementById('drawingBoard');
+          const ctx = canvas.getContext('2d');
+          const colorPicker = document.getElementById('colorPicker');
+          const brushSize = document.getElementById('brushSize');
+          const clearBtn = document.getElementById('clearBtn');
+          const saveBtn = document.getElementById('saveBtn');
+          const downloadBtn = document.getElementById('downloadBtn');
+          const gallery = document.getElementById('drawingGallery');
+          const clearGalleryBtn = document.getElementById('clearGallery');
 
-            let isDrawing = false;
-            let lastX = 0;
-            let lastY = 0;
+          let isDrawing = false;
+          let lastX = 0;
+          let lastY = 0;
 
-            // start with white background
+          // Initialize canvas
+          ctx.fillStyle = 'white';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          ctx.strokeStyle = colorPicker.value;
+          ctx.lineJoin = 'round';
+          ctx.lineCap = 'round';
+          ctx.lineWidth = brushSize.value;
+
+          // Drawing functions (same as before)
+          function getMousePos(canvas, e) {
+            const rect = canvas.getBoundingClientRect();
+            const scaleX = canvas.width / rect.width;
+            const scaleY = canvas.height / rect.height;
+            return {
+              x: (e.clientX - rect.left) * scaleX,
+              y: (e.clientY - rect.top) * scaleY
+            };
+          }
+
+          function getTouchPos(canvas, e) {
+            const rect = canvas.getBoundingClientRect();
+            const scaleX = canvas.width / rect.width;
+            const scaleY = canvas.height / rect.height;
+            return {
+              x: (e.touches[0].clientX - rect.left) * scaleX,
+              y: (e.touches[0].clientY - rect.top) * scaleY
+            };
+          }
+
+          function startDrawing(e) {
+            isDrawing = true;
+            const pos = e.type.includes('mouse') ? getMousePos(canvas, e) : getTouchPos(canvas, e);
+            lastX = pos.x;
+            lastY = pos.y;
+          }
+
+          function draw(e) {
+            if (!isDrawing) return;
+            e.preventDefault();
+
+            const pos = e.type.includes('mouse') ? getMousePos(canvas, e) : getTouchPos(canvas, e);
+
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(pos.x, pos.y);
+            ctx.stroke();
+
+            lastX = pos.x;
+            lastY = pos.y;
+          }
+
+          function stopDrawing() {
+            isDrawing = false;
+          }
+
+          // Event listeners for drawing
+          canvas.addEventListener('mousedown', startDrawing);
+          canvas.addEventListener('mousemove', draw);
+          canvas.addEventListener('mouseup', stopDrawing);
+          canvas.addEventListener('mouseout', stopDrawing);
+          canvas.addEventListener('touchstart', (e) => { e.preventDefault(); startDrawing(e); });
+          canvas.addEventListener('touchmove', (e) => { e.preventDefault(); draw(e); });
+          canvas.addEventListener('touchend', (e) => { e.preventDefault(); stopDrawing(); });
+
+          // Color and brush controls
+          colorPicker.addEventListener('input', (e) => {
+            ctx.strokeStyle = e.target.value;
+          });
+
+          brushSize.addEventListener('input', (e) => {
+            ctx.lineWidth = e.target.value;
+          });
+
+          clearBtn.addEventListener('click', () => {
             ctx.fillStyle = 'white';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-
             ctx.strokeStyle = colorPicker.value;
-            ctx.lineJoin = 'round';
-            ctx.lineCap = 'round';
-            ctx.lineWidth = brushSize.value;
+          });
 
-            function getMousePos(canvas, e) {
-              const rect = canvas.getBoundingClientRect();
-              const scaleX = canvas.width / rect.width;
-              const scaleY = canvas.height / rect.height;
-              return {
-                x: (e.clientX - rect.left) * scaleX,
-                y: (e.clientY - rect.top) * scaleY
-              };
+          // Save drawing to gallery
+          saveBtn.addEventListener('click', () => {
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+            const isEmpty = !imageData.some(channel => channel !== 255);
+
+            if (isEmpty) {
+              alert('Please draw something before saving!');
+              return;
             }
 
-            function getTouchPos(canvas, e) {
-              const rect = canvas.getBoundingClientRect();
-              const scaleX = canvas.width / rect.width;
-              const scaleY = canvas.height / rect.height;
-              return {
-                x: (e.touches[0].clientX - rect.left) * scaleX,
-                y: (e.touches[0].clientY - rect.top) * scaleY
-              };
+            // Save to memory (in a real app, this could be localStorage)
+            const dataURL = canvas.toDataURL("image/png");
+            const timestamp = new Date().toLocaleString();
+            
+            // Add to gallery
+            addToGallery(dataURL, timestamp);
+            
+            // Clear canvas
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.strokeStyle = colorPicker.value;
+            
+            alert('Drawing saved to gallery!');
+          });
+
+          // Download drawing
+          downloadBtn.addEventListener('click', () => {
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+            const isEmpty = !imageData.some(channel => channel !== 255);
+
+            if (isEmpty) {
+              alert('Please draw something before downloading!');
+              return;
             }
 
-            function startDrawing(e) {
-              isDrawing = true;
-              const pos = e.type.includes('mouse') ? getMousePos(canvas, e) : getTouchPos(canvas, e);
-              lastX = pos.x;
-              lastY = pos.y;
+            const dataURL = canvas.toDataURL("image/png");
+            const link = document.createElement('a');
+            link.download = `drawing_${Date.now()}.png`;
+            link.href = dataURL;
+            link.click();
+          });
+
+          // Gallery management
+          let drawings = [];
+
+          function addToGallery(dataURL, timestamp) {
+            drawings.push({ dataURL, timestamp });
+            updateGallery();
+          }
+
+          function updateGallery() {
+            if (drawings.length === 0) {
+              gallery.innerHTML = '<div class="empty-gallery">No drawings yet! Create the first one above.</div>';
+              return;
             }
 
-            function draw(e) {
-              if (!isDrawing) return;
-              e.preventDefault();
+            gallery.innerHTML = drawings.map((drawing, index) => `
+              <div class="gallery-item">
+                <img src="${drawing.dataURL}" alt="Drawing ${index + 1}">
+                <div class="timestamp">${drawing.timestamp}</div>
+              </div>
+            `).join('');
+          }
 
-              const pos = e.type.includes('mouse') ? getMousePos(canvas, e) : getTouchPos(canvas, e);
-
-              ctx.beginPath();
-              ctx.moveTo(lastX, lastY);
-              ctx.lineTo(pos.x, pos.y);
-              ctx.stroke();
-
-              lastX = pos.x;
-              lastY = pos.y;
+          clearGalleryBtn.addEventListener('click', () => {
+            if (confirm('Clear all drawings from gallery?')) {
+              drawings = [];
+              updateGallery();
             }
+          });
 
-            function stopDrawing() {
-              isDrawing = false;
-            }
-
-            // Drawing Events
-            canvas.addEventListener('mousedown', startDrawing);
-            canvas.addEventListener('mousemove', draw);
-            canvas.addEventListener('mouseup', stopDrawing);
-            canvas.addEventListener('mouseout', stopDrawing);
-            canvas.addEventListener('touchstart', (e) => {
-              e.preventDefault();
-              startDrawing(e);
-            });
-            canvas.addEventListener('touchmove', (e) => {
-              e.preventDefault();
-              draw(e);
-            });
-            canvas.addEventListener('touchend', (e) => {
-              e.preventDefault();
-              stopDrawing();
-            });
-
-            // Color and Brush
-            colorPicker.addEventListener('input', (e) => {
-              ctx.strokeStyle = e.target.value;
-            });
-
-            brushSize.addEventListener('input', (e) => {
-              ctx.lineWidth = e.target.value;
-            });
-
-            clearBtn.addEventListener('click', () => {
-              ctx.fillStyle = 'white';
-              ctx.fillRect(0, 0, canvas.width, canvas.height);
-              ctx.strokeStyle = colorPicker.value;
-            });
-
-            saveBtn.addEventListener('click', () => {
-              const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
-              const isEmpty = !imageData.some(channel => channel !== 255);
-
-              if (isEmpty) {
-                alert('Please draw something before sending!');
-                return;
-              }
-
-              sendingOverlay.style.display = 'flex';
-
-              const dataURL = canvas.toDataURL("image/png");
-
-              fetch("https://script.google.com/macros/s/AKfycbzS66dQtLULjCqKrAqgySs6qC9AcsKxPCHkb3hJZYLnfybylISSDpEEXHq-R3FJY6eR-Q/exec", {
-                method: "POST",
-                body: JSON.stringify({ image: dataURL })
-              })
-                .then(res => res.text())
-                .then(msg => {
-                  alert(msg || 'Drawing uploaded!');
-                  ctx.fillStyle = 'white';
-                  ctx.fillRect(0, 0, canvas.width, canvas.height);
-                  ctx.strokeStyle = colorPicker.value;
-                })
-                .catch(err => {
-                  console.error("Error uploading drawing:", err);
-                  alert("Failed to upload drawing.");
-                })
-                .finally(() => {
-                  sendingOverlay.style.display = 'none';
-                });
-            });
+          // Initialize gallery
+          updateGallery();
           </script>
           <!-- end of draw 4 me! -->
 
