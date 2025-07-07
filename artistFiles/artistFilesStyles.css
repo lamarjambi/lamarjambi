@@ -24,7 +24,9 @@ body {
     border-bottom: 8px solid #fff;
     border-left: 8px solid #fff;
     border-right: 8px solid #fff;
-    box-shadow: 0 0 0 8px #ff6b9d, 0 16px 32px rgba(0,0,0,0.3);
+    box-shadow: 0 0 0 8px #ec6ba7, 0 16px 32px rgba(0,0,0,0.3);
+    position: static;
+    transform: none !important;
 }
 
 .content-wrapper {
@@ -32,8 +34,8 @@ body {
     max-width: 1400px;
     margin: 0 auto;
     background: rgba(255, 255, 255, 0.95);
-    margin-top: -20px;
-    border-radius: 20px 20px 0 0;
+    margin-top: 25px;
+    border-radius: 20px;
     box-shadow: 0 -10px 30px rgba(0,0,0,0.2);
     position: relative;
 }
@@ -114,27 +116,27 @@ body {
 }
 
 .tag.software {
-    background: #ff6b9d;
+    background: #ec6ba7;
     color: white;
-    box-shadow: 0 5px 0 #ec6ba7, 0 10px 20px rgba(196, 69, 105, 0.3);
+    box-shadow: 0 5px 0 #ba5082, 0 10px 20px rgba(196, 69, 105, 0.3);
 }
 
 .tag.skill {
-    background: #f8b500;
+    background: #81c950;
     color: white;
-    box-shadow: 0 5px 0 #feca57, 0 10px 20px rgba(248, 181, 0, 0.3);
+    box-shadow: 0 5px 0 #5b9138, 0 10px 20px rgba(248, 181, 0, 0.3);
 }
 
 .tag.tool {
-    background: #00d2d3;
+    background: #547dfd;
     color: white;
-    box-shadow: 0 5px 0 #01a3a4, 0 10px 20px rgba(0, 210, 211, 0.3);
+    box-shadow: 0 5px 0 #4062c8, 0 10px 20px rgba(0, 210, 211, 0.3);
 }
 
 .tag.concept {
-    background: #ff9ff3;
+    background: #c9a0df;
     color: white;
-    box-shadow: 0 5px 0 #f368e0, 0 10px 20px rgba(255, 159, 243, 0.3);
+    box-shadow: 0 5px 0 #a782bb, 0 10px 20px rgba(255, 159, 243, 0.3);
 }
 
 .tag:hover {
@@ -144,7 +146,7 @@ body {
 
 .tag:active {
     transform: translateY(2px);
-    box-shadow: 0 2px 0 #c44569, 0 5px 10px rgba(196, 69, 105, 0.3);
+    box-shadow: 0 2px 0 #fdd23b, 0 5px 10px rgba(196, 69, 105, 0.3);
 }
 
 .details-grid {
