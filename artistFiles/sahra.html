@@ -15,10 +15,64 @@
         <link rel="icon" type="image/x-icon" href="/img/TransJambo-Logo-16px.png">
 </head>
 <body>
-    <!-- <div class="pixel-decoration"></div> -->
 
-    <img src="/img/sahra-the-swimmer.PNG" alt="Fantasy Café" class="artwork-image">
+    <div class="bento-layout">
+        <div class="left-section">
+            <img src="/img/sahra-the-swimmer.PNG" alt="Sahra, The Swimmer" class=" bento-artwork">
+        </div>
 
+        <div class="right-section">
+            <!-- BENTO GRID SECTION -->
+            <div class="bento-grid scroll-reveal reveal-delay-2">
+                <div class="bento-container">
+                    <div class="bento-item large">
+                        <img src="/img/sketch-frens.PNG" alt="Sahra Character Design" class="bento-image">
+                        <div class="bento-overlay">
+                            <h4>Sketch of other project</h4>
+                            <p>Initial concept sketch</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bento-item">
+                        <img src="/img/sahra-detail.PNG" alt="Process Work" class="bento-image">
+                        <div class="bento-overlay">
+                            <h4>Details</h4>
+                            <p>Close-up</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bento-item video">
+                        <video autoplay muted loop class="bento-video">
+                            <source src="/img/sahra-video.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="bento-overlay">
+                            <h4>Speedpaint</h4>
+                            <p>Character in motion</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bento-item">
+                        <img src="/img/sahra-detail2.PNG" alt="Detail Work" class="bento-image">
+                        <div class="bento-overlay">
+                            <h4>Details</h4>
+                            <p>Close-up</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bento-item">
+                        <img src="/img/sahra-detail3.PNG" alt="Color Studies" class="bento-image">
+                        <div class="bento-overlay">
+                            <h4>Details</h4>
+                            <p>Close-up</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- INFO SECTION -->
     <div class="content-wrapper">
         <div class="title-section scroll-reveal">
             <h1 class="artwork-title">
@@ -184,5 +238,14 @@
         `;
         document.head.appendChild(style);
     </script>
+
+    <!-- BACKGROUND SCROLLING -->
+    <script>
+        window.addEventListener('scroll', function () {
+          const scrolled = window.scrollY;
+          document.body.style.backgroundPositionY = -(scrolled * 0.3) + 'px';
+        });
+      </script>
+      <!-- END OF BACKGROUND SCROLLING -->
 </body>
 </html>

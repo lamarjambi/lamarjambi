@@ -138,6 +138,30 @@ strong {
     opacity: 1;
 }
 
+/* Show titles on mobile devices */
+@media (max-width: 768px) {
+    .card-overlay {
+        opacity: 1;
+        background-color: transparent;
+    }
+    
+    .card-overlay p {
+        font-size: 12px;
+        padding: 8px 12px;
+        color: #000000;
+        background-color: rgba(152, 92, 210, 0.9);
+        border-radius: 4px;
+        margin: 0;
+    }
+}
+
+@media (max-width: 414px) {
+    .card-overlay p {
+        font-size: 10px;
+        padding: 6px 10px;
+    }
+}
+
 .card:hover {
     animation: float 1.5s ease-in-out infinite;
     z-index: 1;
