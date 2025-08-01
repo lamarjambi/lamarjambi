@@ -844,99 +844,23 @@ ul.nav-items {
 
 /* ============= MEDIA QUERY FOR MOBILE ============= */
 @media (max-width: 768px) {
-  /* ============= NAVBAR STUFF ============= */
-  .vertical-container {
-    position: fixed;
-    top: 15%;
-    left: 50%;
-    flex-direction: row;
-    transform: translateX(-50%); /* center */
-    display:flex;
+  .scroll-reveal {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translate(0) scale(1) !important;
   }
-
-  .nav-items-top {
-    display: none;
+  
+  .scroll-reveal.active {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translate(0) scale(1) !important;
   }
-
-  .nav-items {
-    position: relative;
-    top: 0;
-    left: 0;
-    width: 90%;
-    padding: 0;
-    list-style: none;
-    pointer-events: all;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    background: #faf0dd;
-    display: none; 
-    margin-right: 1em;
+  
+  .reveal-delay-1,
+  .reveal-delay-2,
+  .reveal-delay-3 {
+    transition-delay: 0s !important;
   }
-
-  .nav-items svg {
-    width: 20px;
-    height: 20px;
-    color: #ec6ba7; 
-  }
-
-  .nav-items a {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    padding: 5px;
-  }
-
-  .vertical-container.active {
-    width: 375px;
-    height: 70px;
-  }
-
-  .vertical-container.active .nav-items {
-    opacity: 1;
-    pointer-events: all;
-    display: flex; 
-  }
-
-  .nav-items-bottom {
-    display: none; 
-  }
-
-  /* fixing mobile issue with not showing icons w/ z-index */
-  .toggle-box {
-    z-index: 1000; 
-    width: 20%;
-  }
-
-  /* ============= END OF NAVBAR STUFF ============= */
-
-  /* ============= HEADER + INTRO TEXTBOX ============= */
-  .about {
-    flex-direction: column;
-    padding: 20px;
-  }
-
-  .about-text {
-    max-width: 100%;
-  }
-
-  .heading {
-    font-size: 2rem;
-  }
-
-  .about div:last-child {
-    justify-content: center;
-    margin-top: 20px;
-  }
-
-  .container {
-    width: 100%;
-    display: flex;
-    flex-direction: column; 
-    gap: 2rem;  
-  }
-  /* ============= END OF HEADER + INTRO TEXTBOX ============= */
 
   /* ============= PROJECTS (GRID) ============= */
   .grid {
@@ -945,205 +869,171 @@ ul.nav-items {
     gap: 20px;
     padding: 5%;
     height: auto;
+    /* Remove any 3D properties from the grid container */
+    perspective: none;
+    transform-style: flat;
   }
 
   .project-section {
     font-family: "Press Start 2P", system-ui;
     width: 90%;
     height: auto;
-    margin-bottom: 14150px;
-    margin: auto;
+    margin: 2rem auto;
+    padding: 1rem;
+    opacity: 1 !important;
+    visibility: visible !important;
+    /* Remove any 3D properties from the section */
+    perspective: none;
+    transform-style: flat;
   }
 
+  /* Each grid item gets its own flip container */
   .grid-item {
-    /* width: 100%;
-    aspect-ratio: 1/1; 
+    height: 300px;
+    width: 100%;
+    margin-bottom: 1rem;
+    position: relative;
+    opacity: 1 !important;
+    visibility: visible !important;
+    
+    /* Individual 3D context for each card */
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    
+    /* Isolate this element's transform */
+    transform: translate3d(0, 0, 0);
+    will-change: transform;
+    
+    /* Ensure it doesn't affect siblings */
+    isolation: isolate;
+  }
+
+  /* The flip happens on the inner container, not the grid-item itself */
+  .grid-item .card-container {
+    width: 100%;
+    height: 100%;
     position: relative;
     transform-style: preserve-3d;
-    margin-bottom: 20px;
-    transition: transform 0.6s; */
-    height: 300px;
+    transition: transform 0.6s ease;
+    transform-origin: center center;
   }
 
-  .grid-item.flipped {
-    transform: rotateY(180deg) !important;
+  /* If you don't have .card-container in your HTML, apply flip to grid-item directly but contained */
+  .grid-item.flip {
+    /* Don't transform the grid-item itself, just its contents */
+  }
+  
+  .grid-item.flip .card-front {
+    transform: rotateY(-180deg);
+  }
+  
+  .grid-item.flip .card-back {
+    transform: rotateY(0deg);
   }
 
   .card-front,
   .card-back {
     width: 100%;
     height: 100%;
-    /* position: absolute;
+    position: absolute;
     top: 0;
     left: 0;
+    border-radius: 10px;
     backface-visibility: hidden;
-    transition: transform 0.6s; */
+    transition: transform 0.6s ease;
+    
+    /* Ensure proper layering */
+    will-change: transform;
+    transform-origin: center center;
   }
 
   .card-front {
-    /* transform: rotateY(0deg); */
     z-index: 2;
+    transform: rotateY(0deg);
   }
 
   .card-back {
     background: #faf0dd;
-    transform: rotateY(180deg);
-    padding: 20px;
+    padding: 15px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
+    box-sizing: border-box;
+    z-index: 1;
+    transform: rotateY(180deg);
   }
 
   .grid-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-
-  /* makes text visible on card back */
-  .grid-item.flipped .card-back {
-    z-index: 1;
-    transform: rotateY(180deg);
-    -webkit-transform: rotateY(180deg);
+    border-radius: 10px;
+    opacity: 1 !important;
+    visibility: visible !important;
   }
 
   .card-back h3 {
-    font-size: 16px;
-    margin-bottom: 10px;
+    font-size: 12px;
+    margin-bottom: 8px;
     color: #ec6ba7;
     background: transparent;
+    line-height: 1.3;
   }
 
   .card-back p {
     font-family: "Dokdo";
-    font-size: 20px;
-    line-height: 1.4;
-    margin-bottom: 15px;
+    font-size: 16px;
+    line-height: 1.3;
+    margin-bottom: 10px;
+    background: transparent;
+    text-align: center;
+  }
+
+  .project-links {
+    margin-top: 8px;
     background: transparent;
   }
-  /* ============= END OF PROJECTS (GRID) ============= */
 
-  /* ============= SKILLS ============= */
-  .skills-section {
-    width: 90%;
+  .project-links a {
+    color: #ec6ba7;
+    text-decoration: none;
+    font-size: 12px;
+    transition: color 0.3s ease;
+    background: transparent;
   }
 
-  .skill-category {
-    grid-template-columns: 1fr;
-    gap: 15px;
+  .project-links a:hover {
+    color: #547dfd;
   }
 
-  .category-name {
-    margin-bottom: 10px;
+  /* Make overlay text visible */
+  .overlay-text {
+    opacity: 0.9 !important;
+    visibility: visible !important;
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    right: 8px;
+    background-color: rgba(255, 255, 255, 0.95);
+    color: #000;
+    font-size: 11px;
+    padding: 6px;
+    text-align: center;
+    border-radius: 6px;
+    border: 1px solid #ec6ba7;
+    z-index: 3;
   }
-  /* ============= END OF SKILLS ============= */
-  
-  /* ============= FOOTER ============= */
-  .footer-content {
-    padding: 0 1rem;
-  }
 
-  /* ============= DRAWING CANVAS ============= */
-  @media (max-width: 768px) {
-    .drawing-section {
-      width: 90%;
-    }
-  
-    .controls {
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-  
-    .control-btn {
-      width: 100%;
-      margin: 5px 0;
-    }
-  
-    .brush-input {
-      width: 100%;
-      max-width: none;
-    }
-  }
-  /* ============= END OF DRAWING CANVAS ============= */
-}
-/* ============= END OF MEDIA QUERY FOR MOBILE ============= */
-
-/* ============= SCROLLING ANIMATION ============= */
-.scroll-reveal {
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.6s ease-out, transform 1s ease-out;
-  will-change: opacity, visibility, transform;
-}
-
-.reveal-fade {
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-.reveal-left {
-  opacity: 0;
-  transform: translateX(-100px);
-}
-
-.reveal-right {
-  opacity: 0;
-  transform: translateX(100px);
-}
-
-.reveal-scale {
-  opacity: 0;
-  transform: scale(0.8);
-}
-
-.scroll-reveal.active {
-  opacity: 1;
-  visibility: visible;
-  transform: translate(0) scale(1);
-}
-
-.reveal-delay-1 {
-  transition-delay: 0.2s;
-}
-
-.reveal-delay-2 {
-  transition-delay: 0.2s;
-}
-
-.reveal-delay-3 {
-  transition-delay: 0.2s;
-}
-
-/* custom animations */
-.hero.scroll-reveal {
-  transition-duration: 0.4s;
-}
-
-.about.scroll-reveal {
-  transition-duration: 0.2s;
-}
-
-.grid-item.scroll-reveal {
-  transition-duration: 0.2s;
-}
-
-.skills-section.scroll-reveal {
-  transition-duration: 0.2s;
-}
-
-@media (max-width: 768px) {
-  .scroll-reveal {
-    transition-duration: 0.5s !important;
+  /* Ensure the flip works with touch */
+  .grid-item {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
   }
   
-  .reveal-left,
-  .reveal-right {
-    transform: translateX(0) translateY(50px);
+  /* Prevent any parent transforms from affecting individual cards */
+  .grid-item {
+    contain: layout style paint;
   }
 }
-/* ============= END OF SCROLLING ANIMATION ============= */
