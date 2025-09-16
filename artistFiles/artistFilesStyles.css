@@ -504,7 +504,6 @@ html, body {
     margin: 5px 0;
 }
 
-/* Responsive styles for new layout */
 @media (max-width: 768px) {
     .back-button-container {
         top: 10px;
