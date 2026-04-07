@@ -1,6 +1,6 @@
 W3lc0me ab0@rd >:]
 
-## Check out the different projects:
+## Check out my projects :P
 
 <details>
 <summary><strong>Games</strong> - Games in Unreal, Unity, GameMaker, and Godot</summary>
