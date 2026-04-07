@@ -29,7 +29,7 @@ W3lc0me ab0@rd >:]
 </details>
 
 <details>
-<summary><strong>AI</strong> - AI in games and research!</summary>
+<summary><strong>AI</strong> - AI in games and research</summary>
 
 - **[NPC-AI](https://github.com/lamarjambi/NPC-AI)** – NPC AI practice :P
 - **[ScriptDoctor-Python](https://github.com/lamarjambi/ScriptDoctor-Python)** – Implementing PuzzleScript in Python
