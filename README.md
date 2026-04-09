@@ -6,7 +6,7 @@ W3lc0me ab0@rd >:]
 <summary><strong>Games</strong> - Games in Unreal, Unity, GameMaker, and Godot</summary>
 
 - **[cosmic-thread](https://github.com/lamarjambi/cosmic-thread)** – 2D puzzle game in space :3
-- **[reach-for-the-stars](https://github.com/lamarjambi/reach-for-the-stars)** – 3D isometric game about dystopian worlds
+- **[expelled](https://github.com/lamarjambi/expelled)** – 3D isometric game about dystopian worlds
 - **[fog-city-shadows](https://github.com/lamarjambi/fog-city-shadows)** – 2.5D horror game about jobs
 - **[hues-quest](https://github.com/lamarjambi/hues-quest)** – 2D RPG game based on color theory
 - **[bobbie-adventure](https://github.com/lamarjambi/bobbie-adventure)** – Follow Bobbie the Cat on her new adventures :3
