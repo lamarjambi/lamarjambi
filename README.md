@@ -43,7 +43,7 @@ W3lc0me ab0@rd >:]
 <summary><strong>Animatronics</strong> - Physical projects' code in C++ and Python (Arduino, Raspberry Pi 4/5)</summary>
 
 - **[Wormy](https://github.com/lamarjambi/wormy)** – Worm animation using 2 servo motors
-
+- **[Terry, The Alien-Jellyfish Hybrid](https://github.com/lamarjambi/terry-alien-jellyfish)** - Arms movement using 2 airpumps + LED reacting to ToF sensor
 </details>
 
 Last updated 06/10/2026
