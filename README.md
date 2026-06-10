@@ -37,4 +37,13 @@ W3lc0me ab0@rd >:]
 
 </details>
 
-Last updated 04/07/2026
+</details>
+
+<details>
+<summary><strong>Animatronics</strong> - Physical projects' code in C++ and Python (Arduino, Raspberry Pi 4/5)</summary>
+
+- **[Wormy](https://github.com/lamarjambi/wormy)** – Worm animation using 2 servo motors
+
+</details>
+
+Last updated 06/10/2026
