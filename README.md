@@ -5,6 +5,9 @@ W3lc0me ab0@rd >:]
 <details>
 <summary><strong>Games</strong> - Games in Unreal, Unity, GameMaker, and Godot</summary>
 
+- **[requiem-forest](https://github.com/lamarjambi/requiem-forest)** – 3D horror game about religion!
+- **[pest-control](https://github.com/lamarjambi/pest-control)** – 3D third-person shooter/FPS game :>
+- **[yokai-unleashed](https://github.com/lamarjambi/yokai-unleashed)** – 3D puzzle game about physics-ish :/
 - **[cosmic-thread](https://github.com/lamarjambi/cosmic-thread)** – 2D puzzle game in space :3
 - **[expelled](https://github.com/lamarjambi/expelled)** – 3D isometric game about dystopian worlds
 - **[fog-city-shadows](https://github.com/lamarjambi/fog-city-shadows)** – 2.5D horror game about jobs
