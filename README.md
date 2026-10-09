@@ -5,6 +5,7 @@ W3lc0me ab0@rd >:]
 <details>
 <summary><strong>Games</strong> - Games in Unreal, Unity, GameMaker, and Godot</summary>
 
+- **[DanceDanceDie](https://github.com/lamarjambi/DanceDanceDie)** – 3D Rhythm horror game!  
 - **[requiem-forest](https://github.com/lamarjambi/requiem-forest)** – 3D horror game about religion!
 - **[pest-control](https://github.com/lamarjambi/pest-control)** – 3D third-person shooter/FPS game :>
 - **[yokai-unleashed](https://github.com/lamarjambi/yokai-unleashed)** – 3D puzzle game about physics-ish :/
@@ -49,4 +50,4 @@ W3lc0me ab0@rd >:]
 - **[terry-alien-jellyfish](https://github.com/lamarjambi/terry-alien-jellyfish)** - Arms movement using 2 airpumps + LED reacting to ToF sensor
 </details>
 
-Last updated 09/03/2026
+Last updated 10/09/2026
