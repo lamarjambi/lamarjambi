@@ -25,6 +25,13 @@ W3lc0me ab0@rd >:]
 </details>
 
 <details>
+<summary><strong>Game Dev Tools</strong> - Custom-built tools for game dev</summary>
+
+- **[RhythmChart](https://github.com/lamarjambi/RhythmChart)** – UE5 tool to convert .wav to .csv for DDD :3
+
+</details>
+
+<details>
 <summary><strong>Apps</strong> - Non-game projects (full-stack, product design)</summary>
 
 - **[bonbon-on-patrol](https://github.com/lamarjambi/bonbon-on-patrol)** – Prototype of evil app :3
